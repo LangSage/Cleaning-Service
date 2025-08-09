@@ -23,9 +23,7 @@
               400: '#38bdf8', 500: '#0ea5e9', 600: '#0284c7', 700: '#0369a1',
               800: '#075985', 900: '#0c4a6e'
             },
-            leaf: {
-              400: '#34d399', 600: '#059669'
-            }
+            leaf: { 400: '#34d399', 600: '#059669' }
           },
           boxShadow: {
             soft: '0 10px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04)'
@@ -41,6 +39,7 @@
     body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,"Noto Sans",sans-serif}
     .container-px{padding-left:1rem;padding-right:1rem}
     @media(min-width:1024px){.container-px{padding-left:2rem;padding-right:2rem}}
+    .ph{background-image:linear-gradient(135deg,#f1f5f9 0%,#e2e8f0 100%);}
   </style>
 </head>
 <body class="bg-white text-slate-900">
@@ -62,7 +61,7 @@
   <header class="sticky top-0 z-40 bg-white/90 backdrop-blur border-b border-slate-200">
     <div class="max-w-7xl mx-auto container-px flex items-center justify-between py-3">
       <a href="#home" class="flex items-center gap-3">
-        <span class="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-leaf-400 text-white font-extrabold shadow-soft">SC</span>
+        <img id="img-logo" alt="Логотип Служба Чистоты" class="h-10 w-10 rounded-xl shadow-soft object-cover ph"/>
         <div class="leading-5">
           <div class="font-extrabold tracking-tight text-lg">Служба Чистоты</div>
           <div class="text-xs text-slate-500">Клининг в Москве и области</div>
@@ -119,12 +118,9 @@
         <div class="mt-6 text-sm text-slate-500">Среднее время отклика — 10 минут. Работаем без предоплаты.</div>
       </div>
       <div class="relative">
-        <div class="aspect-[4/3] w-full rounded-2xl bg-slate-100 shadow-soft grid place-items-center text-slate-400">
-          <div class="text-center p-6">
-            <div class="text-6xl">🧼</div>
-            <div class="mt-2 font-semibold">Здесь будет фото/баннер</div>
-            <div class="text-sm">Плейсхолдер — добавим ваши изображения интерьеров, команды, процесса уборки</div>
-          </div>
+        <!-- Hero image — РЕКОМЕНДУЕМОЕ РАЗРЕШЕНИЕ: 1600×1200 или 1920×1280 -->
+        <div class="aspect-[4/3] w-full rounded-2xl bg-slate-100 shadow-soft overflow-hidden">
+          <img id="img-hero" alt="Геро‑баннер: процесс уборки" class="w-full h-full object-cover ph"/>
         </div>
       </div>
     </div>
@@ -165,19 +161,28 @@
       </div>
       <div class="grid md:grid-cols-3 gap-6">
         <div class="p-6 bg-white rounded-2xl border border-slate-200 shadow-soft">
-          <div class="h-40 rounded-xl bg-slate-100 grid place-items-center text-slate-400">Фото позже</div>
+          <!-- Сервис‑картинка 1 — РЕКОМЕНДУЕМОЕ РАЗРЕШЕНИЕ: 1000×750 -->
+          <div class="h-40 rounded-xl bg-slate-100 overflow-hidden">
+            <img id="img-service-apt" alt="Квартира и дом" class="w-full h-full object-cover ph"/>
+          </div>
           <h3 class="mt-4 font-bold text-lg">Квартира и дом</h3>
           <p class="mt-2 text-slate-700">Поддерживающая, генеральная, после ремонта. Окна, кухня, санузлы — всё по чек‑листам.</p>
           <a href="#flats" class="mt-3 inline-block text-brand-700 font-semibold">Подробнее →</a>
         </div>
         <div class="p-6 bg-white rounded-2xl border border-slate-200 shadow-soft">
-          <div class="h-40 rounded-xl bg-slate-100 grid place-items-center text-slate-400">Фото позже</div>
+          <!-- Сервис‑картинка 2 — РЕКОМЕНДУЕМОЕ РАЗРЕШЕНИЕ: 1000×750 -->
+          <div class="h-40 rounded-xl bg-slate-100 overflow-hidden">
+            <img id="img-service-offices" alt="Офисы и помещения" class="w-full h-full object-cover ph"/>
+          </div>
           <h3 class="mt-4 font-bold text-lg">Офисы и помещения</h3>
           <p class="mt-2 text-slate-700">Ежедневная и разовая уборка для бизнеса. Безостановочная работа — приходим до/после смены.</p>
           <a href="#offices" class="mt-3 inline-block text-brand-700 font-semibold">Подробнее →</a>
         </div>
         <div class="p-6 bg-white rounded-2xl border border-slate-200 shadow-soft">
-          <div class="h-40 rounded-xl bg-slate-100 grid place-items-center text-slate-400">Фото позже</div>
+          <!-- Сервис‑картинка 3 — РЕКОМЕНДУЕМОЕ РАЗРЕШЕНИЕ: 1000×750 -->
+          <div class="h-40 rounded-xl bg-slate-100 overflow-hidden">
+            <img id="img-service-extra" alt="Доп. услуги и химчистка" class="w-full h-full object-cover ph"/>
+          </div>
           <h3 class="mt-4 font-bold text-lg">Доп. услуги / химчистка</h3>
           <p class="mt-2 text-slate-700">Мытьё окон, химчистка мебели, паровая дезинфекция, уборка после мероприятий.</p>
           <a href="#dryclean" class="mt-3 inline-block text-brand-700 font-semibold">Подробнее →</a>
@@ -203,7 +208,10 @@
         </div>
       </div>
       <div class="order-1 md:order-2">
-        <div class="aspect-[4/3] w-full rounded-2xl bg-slate-100 shadow-soft grid place-items-center text-slate-400">Фото позже</div>
+        <!-- Изображение блока «Квартиры» — РЕКОМЕНДУЕМОЕ РАЗРЕШЕНИЕ: 1400×1050 -->
+        <div class="aspect-[4/3] w-full rounded-2xl bg-slate-100 shadow-soft overflow-hidden">
+          <img id="img-flats" alt="Уборка квартир" class="w-full h-full object-cover ph"/>
+        </div>
       </div>
     </div>
   </section>
@@ -212,7 +220,10 @@
   <section id="offices" class="bg-slate-50">
     <div class="max-w-7xl mx-auto container-px py-16 grid md:grid-cols-2 gap-10 items-center">
       <div>
-        <div class="aspect-[4/3] w-full rounded-2xl bg-slate-100 shadow-soft grid place-items-center text-slate-400">Фото позже</div>
+        <!-- Изображение блока «Офисы» — РЕКОМЕНДУЕМОЕ РАЗРЕШЕНИЕ: 1400×1050 -->
+        <div class="aspect-[4/3] w-full rounded-2xl bg-slate-100 shadow-soft overflow-hidden">
+          <img id="img-offices" alt="Уборка офисов" class="w-full h-full object-cover ph"/>
+        </div>
       </div>
       <div>
         <h2 class="text-3xl font-extrabold tracking-tight">Офисы и коммерческие помещения</h2>
@@ -238,9 +249,25 @@
         <p class="mt-4 text-slate-700">Деликатная химчистка мягкой мебели и ковров, паровая дезинфекция детских и зооуглов, мытьё окон и витражей, уборка после мероприятий, помощь по дому (глажка, смена постельного белья).</p>
       </div>
       <div class="mt-8 grid md:grid-cols-3 gap-6">
-        <div class="p-6 rounded-2xl border border-slate-200 bg-slate-50">Диван — от 1500 ₽</div>
-        <div class="p-6 rounded-2xl border border-slate-200 bg-slate-50">Кресло — от 900 ₽</div>
-        <div class="p-6 rounded-2xl border border-slate-200 bg-slate-50">Ковер — от 200 ₽/м²</div>
+        <!-- Карточки с ценами: рекоменд. 1000×750 каждая -->
+        <div class="p-6 rounded-2xl border border-slate-200 bg-slate-50">
+          <div class="h-40 rounded-xl overflow-hidden bg-slate-100">
+            <img id="img-dry-sofa" alt="Химчистка дивана" class="w-full h-full object-cover ph"/>
+          </div>
+          <div class="mt-3 font-semibold">Диван — от 1500 ₽</div>
+        </div>
+        <div class="p-6 rounded-2xl border border-slate-200 bg-slate-50">
+          <div class="h-40 rounded-xl overflow-hidden bg-slate-100">
+            <img id="img-dry-armchair" alt="Химчистка кресла" class="w-full h-full object-cover ph"/>
+          </div>
+          <div class="mt-3 font-semibold">Кресло — от 900 ₽</div>
+        </div>
+        <div class="p-6 rounded-2xl border border-slate-200 bg-slate-50">
+          <div class="h-40 rounded-xl overflow-hidden bg-slate-100">
+            <img id="img-dry-carpet" alt="Химчистка ковра" class="w-full h-full object-cover ph"/>
+          </div>
+          <div class="mt-3 font-semibold">Ковер — от 200 ₽/м²</div>
+        </div>
       </div>
     </div>
   </section>
@@ -248,7 +275,7 @@
   <!-- Process -->
   <section class="bg-slate-50">
     <div class="max-w-7xl mx-auto container-px py-16">
-      <h2 class="text-3xl font-extrabold tracking-tight">Как мы работаем</h2>
+      <h2 class="text-3л font-extrabold tracking-tight">Как мы работаем</h2>
       <div class="mt-8 grid md:grid-cols-4 gap-6">
         <div class="p-6 bg-white rounded-2xl border border-slate-200 shadow-soft">
           <div class="text-2xl font-extrabold">1</div>
@@ -465,21 +492,73 @@
     if (menuBtn) menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
     // Year
     document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
 
-  <!-- JSON-LD -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": "Служба Чистоты",
-    "description": "Клининг в Москве и области: квартиры, дома, офисы, химчистка мебели и ковров.",
-    "areaServed": "Москва и Московская область",
-    "telephone": "+7XXXXXXXXXX",
-    "image": "/placeholder-social.jpg",
-    "openingHours": "Mo-Su 08:00-22:00",
-    "url": "https://example.ru"
-  }
+    /* =====================
+       КОНФИГУРАЦИЯ ИЗОБРАЖЕНИЙ
+       Заполни пути ниже — картинки автоматически подставятся на сайт.
+       Рекомендуемые размеры:
+       - hero: 1600×1200 или 1920×1280
+       - flats/offices: 1400×1050
+       - service cards (3 шт.): 1000×750
+       - dryclean cards (3 шт.): 1000×750
+       - logo квадрат: 512×512 (ico/png)
+       - social/OG: 1200×630
+    ====================== */
+    const IMG = {
+      hero: "img1.png",              // геро‑баннер (1600×1200)
+      logo: '',              // логотип 1:1 (512×512)
+      serviceApt: '',        // карточка услуги №1 (1000×750)
+      serviceOffices: '',    // карточка услуги №2 (1000×750)
+      serviceExtra: '',      // карточка услуги №3 (1000×750)
+      flats: '',             // изображение блока «Квартиры» (1400×1050)
+      offices: '',           // изображение блока «Офисы» (1400×1050)
+      drySofa: '',           // карточка химчистки «Диван» (1000×750)
+      dryArmchair: '',       // карточка химчистки «Кресло» (1000×750)
+      dryCarpet: '',         // карточка химчистки «Ковер» (1000×750)
+      social: ''             // OpenGraph/социальный превью (1200×630)
+    };
+
+    function setSrc(id, url){
+      if(!url) return; const el = document.getElementById(id); if(el){ el.src = url; el.classList.remove('ph'); }
+    }
+
+    // Применение изображений
+    setSrc('img-hero', IMG.hero);
+    setSrc('img-logo', IMG.logo);
+    setSrc('img-service-apt', IMG.serviceApt);
+    setSrc('img-service-offices', IMG.serviceOffices);
+    setSrc('img-service-extra', IMG.serviceExtra);
+    setSrc('img-flats', IMG.flats);
+    setSrc('img-offices', IMG.offices);
+    setSrc('img-dry-sofa', IMG.drySofa);
+    setSrc('img-dry-armchair', IMG.dryArmchair);
+    setSrc('img-dry-carpet', IMG.dryCarpet);
+
+    // Обновляем OpenGraph картинку, если задана
+    if(IMG.social){
+      const og = document.querySelector('meta[property="og:image"]');
+      if(og) og.setAttribute('content', IMG.social);
+    }
+
+    /* =====================
+      JSON-LD (генерация динамически, чтобы подставить IMG.social)
+      Заполни telephone/url ниже при необходимости.
+    ====================== */
+    const structured = {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Служба Чистоты",
+      "description": "Клининг в Москве и области: квартиры, дома, офисы, химчистка мебели и ковров.",
+      "areaServed": "Москва и Московская область",
+      "telephone": "+7XXXXXXXXXX",
+      "image": IMG.social || "/placeholder-social.jpg",
+      "openingHours": "Mo-Su 08:00-22:00",
+      "url": "https://example.ru"
+    };
+    const ld = document.createElement('script');
+    ld.type = 'application/ld+json';
+    ld.textContent = JSON.stringify(structured);
+    document.head.appendChild(ld);
   </script>
 </body>
 </html>
