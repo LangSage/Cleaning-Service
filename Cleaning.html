@@ -2,14 +2,20 @@
 <html lang="ru">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- База проекта в подпапке GitHub Pages -->
+  <base href="https://langsage.github.io/Cleaning-Service/">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+
   <title>Служба Чистоты — уборка квартир, домов и офисов в Москве и области</title>
   <meta name="description" content="Профессиональная уборка квартир, домов и офисов в Москве и области. Быстрый выезд, прозрачные цены, гарантия качества. Звоните: +7 (___) ___-__-__." />
   <meta property="og:title" content="Служба Чистоты — клининговая компания" />
   <meta property="og:description" content="Уберём квартиру, дом или офис — аккуратно, безопасно и вовремя." />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="/placeholder-social.jpg" />
-  <link rel="icon" href="/favicon.ico" />
+  <!-- БЫЛО: /placeholder-social.jpg -->
+  <meta property="og:image" content="placeholder-social.jpg" />
+  <!-- БЫЛО: /favicon.ico -->
+  <link rel="icon" href="favicon.ico" />
 
   <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -52,7 +58,7 @@
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M20.52 3.48A11.94 11.94 0 0 0 12.01 0 11.99 11.99 0 0 0 0 12c0 2.11.55 4.11 1.6 5.91L0 24l6.22-1.63A12 12 0 0 0 12.01 24C18.63 24 24 18.63 24 12c0-3.2-1.25-6.21-3.48-8.52ZM12 22.05c-1.92 0-3.79-.54-5.41-1.57l-.39-.24-3.69.97.99-3.6-.25-.41A9.93 9.93 0 0 1 1.95 12 10.05 10.05 0 0 1 12 1.95 10.05 10.05 0 0 1 22.05 12 10.05 10.05 0 0 1 12 22.05Zm5.7-7.44c-.31-.16-1.82-.9-2.1-1-.27-.1-.47-.16-.66.16-.2.32-.76 1-.93 1.21-.17.21-.34.24-.65.08-.31-.16-1.3-.48-2.47-1.53-.91-.8-1.53-1.78-1.71-2.09-.18-.31-.02-.48.14-.64.15-.15.31-.39.46-.59.15-.2.2-.34.31-.57.1-.24.05-.43-.02-.59-.08-.16-.66-1.59-.91-2.18-.24-.58-.49-.5-.66-.51l-.57-.01c-.2 0-.51.07-.77.34-.26.27-1 1-1 2.44s1.02 2.83 1.16 3.03c.14.2 2 3.06 4.84 4.29.68.3 1.21.48 1.62.62.68.22 1.3.19 1.8.12.55-.08 1.82-.74 2.08-1.45.26-.71.26-1.31.18-1.44-.08-.13-.28-.21-.59-.37Z"/></svg>
           <span class="hidden sm:inline">WhatsApp</span>
         </a>
-        <a class="font-semibold" href="tel:+7XXXXXXXXXX">+7 (___) ___‑__‑__</a>
+        <a class="font-semibold" href="tel:+7XXXXXXXXXX">+7 (___) ___-__-__</a>
       </div>
     </div>
   </div>
@@ -108,7 +114,7 @@
         </h1>
         <ul class="mt-6 space-y-3 text-slate-700">
           <li class="flex items-start gap-3"><span class="mt-1 h-2.5 w-2.5 rounded-full bg-leaf-400"></span> Надёжные клинеры с проверкой и обучением</li>
-          <li class="flex items-start gap-3"><span class="mt-1 h-2.5 w-2.5 rounded-full bg-leaf-400"></span> Эко‑средства, бережно к детям и животным</li>
+          <li class="flex items-start gap-3"><span class="mt-1 h-2.5 w-2.5 rounded-full bg-leaf-400"></span> Эко-средства, бережно к детям и животным</li>
           <li class="flex items-start gap-3"><span class="mt-1 h-2.5 w-2.5 rounded-full bg-leaf-400"></span> Прозрачные цены и гарантия переделки</li>
         </ul>
         <div class="mt-8 flex flex-col sm:flex-row gap-3">
@@ -118,9 +124,8 @@
         <div class="mt-6 text-sm text-slate-500">Среднее время отклика — 10 минут. Работаем без предоплаты.</div>
       </div>
       <div class="relative">
-        <!-- Hero image — РЕКОМЕНДУЕМОЕ РАЗРЕШЕНИЕ: 1600×1200 или 1920×1280 -->
         <div class="aspect-[4/3] w-full rounded-2xl bg-slate-100 shadow-soft overflow-hidden">
-          <img id="img-hero" alt="Геро‑баннер: процесс уборки" class="w-full h-full object-cover ph"/>
+          <img id="img-hero" alt="Геро-баннер: процесс уборки" class="w-full h-full object-cover ph"/>
         </div>
       </div>
     </div>
@@ -161,16 +166,14 @@
       </div>
       <div class="grid md:grid-cols-3 gap-6">
         <div class="p-6 bg-white rounded-2xl border border-slate-200 shadow-soft">
-          <!-- Сервис‑картинка 1 — РЕКОМЕНДУЕМОЕ РАЗРЕШЕНИЕ: 1000×750 -->
           <div class="h-40 rounded-xl bg-slate-100 overflow-hidden">
             <img id="img-service-apt" alt="Квартира и дом" class="w-full h-full object-cover ph"/>
           </div>
           <h3 class="mt-4 font-bold text-lg">Квартира и дом</h3>
-          <p class="mt-2 text-slate-700">Поддерживающая, генеральная, после ремонта. Окна, кухня, санузлы — всё по чек‑листам.</p>
+          <p class="mt-2 text-slate-700">Поддерживающая, генеральная, после ремонта. Окна, кухня, санузлы — всё по чек-листам.</p>
           <a href="#flats" class="mt-3 inline-block text-brand-700 font-semibold">Подробнее →</a>
         </div>
         <div class="p-6 bg-white rounded-2xl border border-slate-200 shadow-soft">
-          <!-- Сервис‑картинка 2 — РЕКОМЕНДУЕМОЕ РАЗРЕШЕНИЕ: 1000×750 -->
           <div class="h-40 rounded-xl bg-slate-100 overflow-hidden">
             <img id="img-service-offices" alt="Офисы и помещения" class="w-full h-full object-cover ph"/>
           </div>
@@ -179,7 +182,6 @@
           <a href="#offices" class="mt-3 inline-block text-brand-700 font-semibold">Подробнее →</a>
         </div>
         <div class="p-6 bg-white rounded-2xl border border-slate-200 shadow-soft">
-          <!-- Сервис‑картинка 3 — РЕКОМЕНДУЕМОЕ РАЗРЕШЕНИЕ: 1000×750 -->
           <div class="h-40 rounded-xl bg-slate-100 overflow-hidden">
             <img id="img-service-extra" alt="Доп. услуги и химчистка" class="w-full h-full object-cover ph"/>
           </div>
@@ -196,7 +198,7 @@
     <div class="max-w-7xl mx-auto container-px py-16 grid md:grid-cols-2 gap-10 items-center">
       <div class="order-2 md:order-1">
         <h2 class="text-3xl font-extrabold tracking-tight">Уборка квартир и домов</h2>
-        <p class="mt-4 text-slate-700">Чек‑лист включает пыль, полы, зеркала, сантехнику, кухню, технику снаружи, вынос мусора. Дополнительно по запросу: окна, духовка, холодильник, люстры, труднодоступные места.</p>
+        <p class="mt-4 text-slate-700">Чек-лист включает пыль, полы, зеркала, сантехнику, кухню, технику снаружи, вынос мусора. Дополнительно по запросу: окна, духовка, холодильник, люстры, труднодоступные места.</p>
         <ul class="mt-4 space-y-2 text-slate-700">
           <li>• Поддерживающая (еженедельно/раз в две недели)</li>
           <li>• Генеральная (раз в месяц/квартал)</li>
@@ -208,7 +210,6 @@
         </div>
       </div>
       <div class="order-1 md:order-2">
-        <!-- Изображение блока «Квартиры» — РЕКОМЕНДУЕМОЕ РАЗРЕШЕНИЕ: 1400×1050 -->
         <div class="aspect-[4/3] w-full rounded-2xl bg-slate-100 shadow-soft overflow-hidden">
           <img id="img-flats" alt="Уборка квартир" class="w-full h-full object-cover ph"/>
         </div>
@@ -220,7 +221,6 @@
   <section id="offices" class="bg-slate-50">
     <div class="max-w-7xl mx-auto container-px py-16 grid md:grid-cols-2 gap-10 items-center">
       <div>
-        <!-- Изображение блока «Офисы» — РЕКОМЕНДУЕМОЕ РАЗРЕШЕНИЕ: 1400×1050 -->
         <div class="aspect-[4/3] w-full rounded-2xl bg-slate-100 shadow-soft overflow-hidden">
           <img id="img-offices" alt="Уборка офисов" class="w-full h-full object-cover ph"/>
         </div>
@@ -249,7 +249,6 @@
         <p class="mt-4 text-slate-700">Деликатная химчистка мягкой мебели и ковров, паровая дезинфекция детских и зооуглов, мытьё окон и витражей, уборка после мероприятий, помощь по дому (глажка, смена постельного белья).</p>
       </div>
       <div class="mt-8 grid md:grid-cols-3 gap-6">
-        <!-- Карточки с ценами: рекоменд. 1000×750 каждая -->
         <div class="p-6 rounded-2xl border border-slate-200 bg-slate-50">
           <div class="h-40 rounded-xl overflow-hidden bg-slate-100">
             <img id="img-dry-sofa" alt="Химчистка дивана" class="w-full h-full object-cover ph"/>
@@ -290,7 +289,7 @@
         <div class="p-6 bg-white rounded-2xl border border-slate-200 shadow-soft">
           <div class="text-2xl font-extrabold">3</div>
           <div class="mt-2 font-bold">Уборка</div>
-          <div class="text-slate-700">Работаем по чек‑листам, бережно относимся к вещам.</div>
+          <div class="text-slate-700">Работаем по чек-листам, бережно относимся к вещам.</div>
         </div>
         <div class="p-6 bg-white rounded-2xl border border-slate-200 shadow-soft">
           <div class="text-2xl font-extrabold">4</div>
@@ -329,7 +328,6 @@
       <p class="mt-4 text-slate-700">Ниже — ориентировочные цены. Точная стоимость зависит от метража и состояния. Сообщите параметры — рассчитаем за 2 минуты.</p>
 
       <div class="mt-8 grid lg:grid-cols-3 gap-6">
-        <!-- Квартира/Дом -->
         <div class="bg-white rounded-2xl border border-slate-200 shadow-soft p-6 flex flex-col">
           <h3 class="text-xl font-bold">Квартира / Дом</h3>
           <div class="mt-1 text-slate-600 text-sm">поддерживающая/генеральная</div>
@@ -341,7 +339,6 @@
           </ul>
           <a href="#contacts" class="mt-6 inline-flex justify-center px-5 py-3 rounded-xl bg-leaf-400 text-white font-semibold hover:bg-leaf-600">Заказать</a>
         </div>
-        <!-- Офисы -->
         <div class="bg-white rounded-2xl border-2 border-brand-200 shadow-soft p-6 flex flex-col">
           <div class="inline-flex items-center gap-2 text-xs font-semibold text-brand-700 bg-brand-100 px-2 py-1 rounded-full self-start">Популярно</div>
           <h3 class="mt-2 text-xl font-bold">Офисы и помещения</h3>
@@ -354,7 +351,6 @@
           </ul>
           <a href="#contacts" class="mt-6 inline-flex justify-center px-5 py-3 rounded-xl bg-brand-700 text-white font-semibold hover:bg-brand-800">Оставить заявку</a>
         </div>
-        <!-- Химчистка / Доп -->
         <div class="bg-white rounded-2xl border border-slate-200 shadow-soft p-6 flex flex-col">
           <h3 class="text-xl font-bold">Химчистка / Доп. услуги</h3>
           <div class="mt-1 text-slate-600 text-sm">мебель, ковры, окна</div>
@@ -368,7 +364,6 @@
         </div>
       </div>
 
-      <!-- FAQ -->
       <div class="mt-12 max-w-3xl">
         <h3 class="text-xl font-extrabold">Частые вопросы</h3>
         <div class="mt-4 divide-y divide-slate-200 border border-slate-200 rounded-2xl">
@@ -376,7 +371,7 @@
             <summary class="flex cursor-pointer list-none items-center justify-between font-medium">С какими средствами работаете?
               <span class="transition group-open:rotate-180">⌄</span>
             </summary>
-            <p class="mt-2 text-slate-700">Используем безопасные сертифицированные составы. По запросу — гипоаллергенные и эко‑средства.</p>
+            <p class="mt-2 text-slate-700">Используем безопасные сертифицированные составы. По запросу — гипоаллергенные и эко-средства.</p>
           </details>
           <details class="group p-4">
             <summary class="flex cursor-pointer list-none items-center justify-between font-medium">Как рассчитывается цена?
@@ -388,7 +383,7 @@
             <summary class="flex cursor-pointer list-none items-center justify-between font-medium">Есть ли гарантия?
               <span class="transition group-open:rotate-180">⌄</span>
             </summary>
-            <p class="mt-2 text-slate-700">Да, если что‑то упустили — бесплатно приедем и исправим в ближайшее время.</p>
+            <p class="mt-2 text-slate-700">Да, если что-то упустили — бесплатно приедем и исправим в ближайшее время.</p>
           </details>
         </div>
       </div>
@@ -402,18 +397,18 @@
         <h2 class="text-3xl font-extrabold tracking-tight">Контакты</h2>
         <p class="mt-4 text-slate-700">Напишите в мессенджер или позвоните — ответим в течение 10 минут и предложим свободные слоты на сегодня/завтра.</p>
         <div class="mt-6 grid sm:grid-cols-2 gap-4">
-          <a href="tel:+7XXXXXXXXXX" class="p-5 rounded-2xl bg-brand-700 text-white font-semibold shadow-soft hover:bg-brand-800 flex items-center justify-center">Позвонить: +7 (___) ___‑__‑__</a>
+          <a href="tel:+7XXXXXXXXXX" class="p-5 rounded-2xl bg-brand-700 text-white font-semibold shadow-soft hover:bg-brand-800 flex items-center justify-center">Позвонить: +7 (___) ___-__-__</a>
           <a href="https://wa.me/7XXXXXXXXXX" class="p-5 rounded-2xl border border-slate-300 font-semibold hover:bg-slate-50 flex items-center justify-center">Написать в WhatsApp</a>
         </div>
         <div class="mt-6 text-sm text-slate-600">Работаем: Пн–Вс 8:00–22:00 • Москва и область</div>
         <div class="mt-6 p-4 bg-slate-50 rounded-2xl border border-slate-200">
           <div class="font-semibold">Юридическая информация</div>
-          <div class="text-sm text-slate-600 mt-1">«Служба Чистоты», ИНН/ОГРН — укажем позже. Договор‑оферта и политика конфиденциальности — добавить ссылками.</div>
+          <div class="text-sm text-slate-600 mt-1">«Служба Чистоты», ИНН/ОГРН — укажем позже. Договор-оферта и политика конфиденциальности — добавить ссылками.</div>
         </div>
       </div>
 
       <form class="bg-slate-50 border border-slate-200 rounded-2xl p-6 shadow-soft" onsubmit="event.preventDefault(); alert('Спасибо! Мы свяжемся с вами в ближайшее время.'); this.reset();">
-        <h3 class="text-xl font-extrabold">Быстрая заявка</h3>
+        <h3 class="text-xl text-slate-900 font-extrabold">Быстрая заявка</h3>
         <div class="mt-4 grid sm:grid-cols-2 gap-4">
           <div>
             <label class="text-sm text-slate-600">Имя</label>
@@ -421,7 +416,7 @@
           </div>
           <div>
             <label class="text-sm text-slate-600">Телефон</label>
-            <input required type="tel" class="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 focus:outline-none focus:ring-4 focus:ring-brand-200" placeholder="+7 ___ ___‑__‑__" />
+            <input required type="tel" class="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 focus:outline-none focus:ring-4 focus:ring-brand-200" placeholder="+7 ___ ___-__-__" />
           </div>
           <div class="sm:col-span-2">
             <label class="text-sm text-slate-600">Тип уборки</label>
@@ -475,7 +470,7 @@
       <div>
         <div class="font-semibold">Связь</div>
         <ul class="mt-2 space-y-1 text-sm text-slate-300">
-          <li><a href="tel:+7XXXXXXXXXX" class="hover:text-white">+7 (___) ___‑__‑__</a></li>
+          <li><a href="tel:+7XXXXXXXXXX" class="hover:text-white">+7 (___) ___-__-__</a></li>
           <li><a href="mailto:info@example.ru" class="hover:text-white">info@example.ru</a></li>
           <li><a href="https://wa.me/7XXXXXXXXXX" class="hover:text-white">WhatsApp</a></li>
         </ul>
@@ -505,17 +500,17 @@
        - social/OG: 1200×630
     ====================== */
     const IMG = {
-      hero: "img1.png",              // геро‑баннер (1600×1200)
-      logo: '',              // логотип 1:1 (512×512)
-      serviceApt: '',        // карточка услуги №1 (1000×750)
-      serviceOffices: '',    // карточка услуги №2 (1000×750)
-      serviceExtra: '',      // карточка услуги №3 (1000×750)
-      flats: '',             // изображение блока «Квартиры» (1400×1050)
-      offices: '',           // изображение блока «Офисы» (1400×1050)
-      drySofa: '',           // карточка химчистки «Диван» (1000×750)
-      dryArmchair: '',       // карточка химчистки «Кресло» (1000×750)
-      dryCarpet: '',         // карточка химчистки «Ковер» (1000×750)
-      social: ''             // OpenGraph/социальный превью (1200×630)
+      hero: "img1.png",      // геро-баннер (1600×1200)
+      logo: "",              // логотип 1:1 (512×512)
+      serviceApt: "",        // карточка услуги №1 (1000×750)
+      serviceOffices: "",    // карточка услуги №2 (1000×750)
+      serviceExtra: "",      // карточка услуги №3 (1000×750)
+      flats: "",             // изображение блока «Квартиры» (1400×1050)
+      offices: "",           // изображение блока «Офисы» (1400×1050)
+      drySofa: "",           // карточка химчистки «Диван» (1000×750)
+      dryArmchair: "",       // карточка химчистки «Кресло» (1000×750)
+      dryCarpet: "",         // карточка химчистки «Ковер» (1000×750)
+      social: ""             // OpenGraph/социальный превью (1200×630)
     };
 
     function setSrc(id, url){
@@ -542,7 +537,7 @@
 
     /* =====================
       JSON-LD (генерация динамически, чтобы подставить IMG.social)
-      Заполни telephone/url ниже при необходимости.
+      БЫЛО: "/placeholder-social.jpg" — заменили на относительный путь
     ====================== */
     const structured = {
       "@context": "https://schema.org",
@@ -551,7 +546,7 @@
       "description": "Клининг в Москве и области: квартиры, дома, офисы, химчистка мебели и ковров.",
       "areaServed": "Москва и Московская область",
       "telephone": "+7XXXXXXXXXX",
-      "image": IMG.social || "/placeholder-social.jpg",
+      "image": IMG.social || "placeholder-social.jpg",
       "openingHours": "Mo-Su 08:00-22:00",
       "url": "https://example.ru"
     };
@@ -559,6 +554,21 @@
     ld.type = 'application/ld+json';
     ld.textContent = JSON.stringify(structured);
     document.head.appendChild(ld);
+
+    /* ============ Доп. защита от абсолютных путей со слэшем ============
+       Если где-то случайно появится путь, начинающийся с '/',
+       этот блок преобразует его в относительный к подпапке.
+       Можно удалить, когда все пути будут относительными.
+    ===================================================================== */
+    (function (prefix) {
+      document.querySelectorAll('img[src^="/"],script[src^="/"],link[href^="/"]').forEach(el => {
+        if (el.tagName === 'LINK') {
+          el.href = prefix + el.getAttribute('href').slice(1);
+        } else {
+          el.src = prefix + el.getAttribute('src').slice(1);
+        }
+      });
+    })("/Cleaning-Service/");
   </script>
 </body>
 </html>
