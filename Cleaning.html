@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Служба Чистоты — уборка квартир, домов и офисов в Москве и области</title>
+  <meta name="description" content="Профессиональная уборка квартир, домов и офисов в Москве и области. Быстрый выезд, прозрачные цены, гарантия качества. Звоните: +7 (___) ___-__-__." />
+  <meta property="og:title" content="Служба Чистоты — клининговая компания" />
+  <meta property="og:description" content="Уберём квартиру, дом или офис — аккуратно, безопасно и вовремя." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="/placeholder-social.jpg" />
+  <link rel="icon" href="/favicon.ico" />
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#f0f9ff', 100: '#e0f2fe', 200: '#bae6fd', 300: '#7dd3fc',
+              400: '#38bdf8', 500: '#0ea5e9', 600: '#0284c7', 700: '#0369a1',
+              800: '#075985', 900: '#0c4a6e'
+            },
+            leaf: {
+              400: '#34d399', 600: '#059669'
+            }
+          },
+          boxShadow: {
+            soft: '0 10px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04)'
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    html{scroll-behavior:smooth}
+    body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,"Noto Sans",sans-serif}
+    .container-px{padding-left:1rem;padding-right:1rem}
+    @media(min-width:1024px){.container-px{padding-left:2rem;padding-right:2rem}}
+  </style>
+</head>
+<body class="bg-white text-slate-900">
+  <!-- Top bar -->
+  <div class="bg-brand-900 text-white text-sm">
+    <div class="max-w-7xl mx-auto container-px flex items-center justify-between py-2">
+      <p class="hidden sm:block">Работаем в Москве и области • Ежедневно 8:00–22:00</p>
+      <div class="flex items-center gap-4">
+        <a href="https://wa.me/7XXXXXXXXXX" class="inline-flex items-center gap-2 hover:opacity-90" aria-label="Написать в WhatsApp">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M20.52 3.48A11.94 11.94 0 0 0 12.01 0 11.99 11.99 0 0 0 0 12c0 2.11.55 4.11 1.6 5.91L0 24l6.22-1.63A12 12 0 0 0 12.01 24C18.63 24 24 18.63 24 12c0-3.2-1.25-6.21-3.48-8.52ZM12 22.05c-1.92 0-3.79-.54-5.41-1.57l-.39-.24-3.69.97.99-3.6-.25-.41A9.93 9.93 0 0 1 1.95 12 10.05 10.05 0 0 1 12 1.95 10.05 10.05 0 0 1 22.05 12 10.05 10.05 0 0 1 12 22.05Zm5.7-7.44c-.31-.16-1.82-.9-2.1-1-.27-.1-.47-.16-.66.16-.2.32-.76 1-.93 1.21-.17.21-.34.24-.65.08-.31-.16-1.3-.48-2.47-1.53-.91-.8-1.53-1.78-1.71-2.09-.18-.31-.02-.48.14-.64.15-.15.31-.39.46-.59.15-.2.2-.34.31-.57.1-.24.05-.43-.02-.59-.08-.16-.66-1.59-.91-2.18-.24-.58-.49-.5-.66-.51l-.57-.01c-.2 0-.51.07-.77.34-.26.27-1 1-1 2.44s1.02 2.83 1.16 3.03c.14.2 2 3.06 4.84 4.29.68.3 1.21.48 1.62.62.68.22 1.3.19 1.8.12.55-.08 1.82-.74 2.08-1.45.26-.71.26-1.31.18-1.44-.08-.13-.28-.21-.59-.37Z"/></svg>
+          <span class="hidden sm:inline">WhatsApp</span>
+        </a>
+        <a class="font-semibold" href="tel:+7XXXXXXXXXX">+7 (___) ___‑__‑__</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="sticky top-0 z-40 bg-white/90 backdrop-blur border-b border-slate-200">
+    <div class="max-w-7xl mx-auto container-px flex items-center justify-between py-3">
+      <a href="#home" class="flex items-center gap-3">
+        <span class="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-leaf-400 text-white font-extrabold shadow-soft">SC</span>
+        <div class="leading-5">
+          <div class="font-extrabold tracking-tight text-lg">Служба Чистоты</div>
+          <div class="text-xs text-slate-500">Клининг в Москве и области</div>
+        </div>
+      </a>
+
+      <nav class="hidden md:flex items-center gap-6 font-medium text-sm">
+        <a href="#about" class="hover:text-brand-700">О нас</a>
+        <a href="#flats" class="hover:text-brand-700">Уборка квартир</a>
+        <a href="#offices" class="hover:text-brand-700">Офисы и помещения</a>
+        <a href="#dryclean" class="hover:text-brand-700">Химчистка</a>
+        <a href="#pricing" class="hover:text-brand-700">Цены</a>
+        <a href="#contacts" class="hover:text-brand-700">Контакты</a>
+      </nav>
+
+      <div class="md:hidden">
+        <button id="menuBtn" class="p-2 rounded-lg border border-slate-300" aria-label="Меню">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+    </div>
+    <!-- mobile menu -->
+    <div id="mobileMenu" class="md:hidden hidden border-t border-slate-200 bg-white">
+      <div class="max-w-7xl mx-auto container-px py-3 flex flex-col gap-3 text-sm">
+        <a href="#about" class="py-2">О нас</a>
+        <a href="#flats" class="py-2">Уборка квартир</a>
+        <a href="#offices" class="py-2">Офисы и помещения</a>
+        <a href="#dryclean" class="py-2">Химчистка</a>
+        <a href="#pricing" class="py-2">Цены</a>
+        <a href="#contacts" class="py-2">Контакты</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section id="home" class="relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-brand-50 via-white to-leaf-400/10 pointer-events-none"></div>
+    <div class="max-w-7xl mx-auto container-px grid lg:grid-cols-2 gap-10 items-center py-16 lg:py-24">
+      <div>
+        <h1 class="text-4xl sm:text-5xl font-extrabold leading-tight">
+          Чисто. Безопасно. Вовремя.
+          <span class="block text-brand-700">Уборка квартир, домов и офисов</span>
+          <span class="block text-slate-600 text-xl sm:text-2xl mt-4">Москва и область • Ежедневно 8:00–22:00</span>
+        </h1>
+        <ul class="mt-6 space-y-3 text-slate-700">
+          <li class="flex items-start gap-3"><span class="mt-1 h-2.5 w-2.5 rounded-full bg-leaf-400"></span> Надёжные клинеры с проверкой и обучением</li>
+          <li class="flex items-start gap-3"><span class="mt-1 h-2.5 w-2.5 rounded-full bg-leaf-400"></span> Эко‑средства, бережно к детям и животным</li>
+          <li class="flex items-start gap-3"><span class="mt-1 h-2.5 w-2.5 rounded-full bg-leaf-400"></span> Прозрачные цены и гарантия переделки</li>
+        </ul>
+        <div class="mt-8 flex flex-col sm:flex-row gap-3">
+          <a href="#contacts" class="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-brand-700 text-white font-semibold shadow-soft hover:bg-brand-800">Позвонить и заказать</a>
+          <a href="#pricing" class="inline-flex items-center justify-center px-6 py-3 rounded-xl border border-slate-300 font-semibold hover:bg-slate-50">Смотреть цены</a>
+        </div>
+        <div class="mt-6 text-sm text-slate-500">Среднее время отклика — 10 минут. Работаем без предоплаты.</div>
+      </div>
+      <div class="relative">
+        <div class="aspect-[4/3] w-full rounded-2xl bg-slate-100 shadow-soft grid place-items-center text-slate-400">
+          <div class="text-center p-6">
+            <div class="text-6xl">🧼</div>
+            <div class="mt-2 font-semibold">Здесь будет фото/баннер</div>
+            <div class="text-sm">Плейсхолдер — добавим ваши изображения интерьеров, команды, процесса уборки</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust / badges -->
+  <section class="bg-white">
+    <div class="max-w-7xl mx-auto container-px py-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="p-6 rounded-2xl border border-slate-200 shadow-soft text-center">
+        <div class="text-3xl">⭐️⭐️⭐️⭐️⭐️</div>
+        <div class="mt-2 font-semibold">Рейтинг 4.9</div>
+        <div class="text-sm text-slate-600">по отзывам клиентов</div>
+      </div>
+      <div class="p-6 rounded-2xl border border-slate-200 shadow-soft text-center">
+        <div class="text-3xl">24/7</div>
+        <div class="mt-2 font-semibold">Принимаем заявки</div>
+        <div class="text-sm text-slate-600">в удобное для вас время</div>
+      </div>
+      <div class="p-6 rounded-2xl border border-slate-200 shadow-soft text-center">
+        <div class="text-3xl">+2000</div>
+        <div class="mt-2 font-semibold">Успешных уборок</div>
+        <div class="text-sm text-slate-600">с 2019 года</div>
+      </div>
+      <div class="p-6 rounded-2xl border border-slate-200 shadow-soft text-center">
+        <div class="text-3xl">100%</div>
+        <div class="mt-2 font-semibold">Гарантия качества</div>
+        <div class="text-sm text-slate-600">переделка за наш счёт</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services overview -->
+  <section class="bg-slate-50" id="about">
+    <div class="max-w-7xl mx-auto container-px py-16">
+      <div class="max-w-3xl mb-10">
+        <h2 class="text-3xl font-extrabold tracking-tight">Почему «Служба Чистоты»</h2>
+        <p class="mt-4 text-slate-700">Выполняем уборку квартир, домов, помещений и офисов в Москве и области. Рекомендуют семьям, арендодателям и бизнесу. Страхуем ответственность, используем сертифицированные средства и бережём ваше время.</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="p-6 bg-white rounded-2xl border border-slate-200 shadow-soft">
+          <div class="h-40 rounded-xl bg-slate-100 grid place-items-center text-slate-400">Фото позже</div>
+          <h3 class="mt-4 font-bold text-lg">Квартира и дом</h3>
+          <p class="mt-2 text-slate-700">Поддерживающая, генеральная, после ремонта. Окна, кухня, санузлы — всё по чек‑листам.</p>
+          <a href="#flats" class="mt-3 inline-block text-brand-700 font-semibold">Подробнее →</a>
+        </div>
+        <div class="p-6 bg-white rounded-2xl border border-slate-200 shadow-soft">
+          <div class="h-40 rounded-xl bg-slate-100 grid place-items-center text-slate-400">Фото позже</div>
+          <h3 class="mt-4 font-bold text-lg">Офисы и помещения</h3>
+          <p class="mt-2 text-slate-700">Ежедневная и разовая уборка для бизнеса. Безостановочная работа — приходим до/после смены.</p>
+          <a href="#offices" class="mt-3 inline-block text-brand-700 font-semibold">Подробнее →</a>
+        </div>
+        <div class="p-6 bg-white rounded-2xl border border-slate-200 shadow-soft">
+          <div class="h-40 rounded-xl bg-slate-100 grid place-items-center text-slate-400">Фото позже</div>
+          <h3 class="mt-4 font-bold text-lg">Доп. услуги / химчистка</h3>
+          <p class="mt-2 text-slate-700">Мытьё окон, химчистка мебели, паровая дезинфекция, уборка после мероприятий.</p>
+          <a href="#dryclean" class="mt-3 inline-block text-brand-700 font-semibold">Подробнее →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Flats & houses -->
+  <section id="flats" class="bg-white">
+    <div class="max-w-7xl mx-auto container-px py-16 grid md:grid-cols-2 gap-10 items-center">
+      <div class="order-2 md:order-1">
+        <h2 class="text-3xl font-extrabold tracking-tight">Уборка квартир и домов</h2>
+        <p class="mt-4 text-slate-700">Чек‑лист включает пыль, полы, зеркала, сантехнику, кухню, технику снаружи, вынос мусора. Дополнительно по запросу: окна, духовка, холодильник, люстры, труднодоступные места.</p>
+        <ul class="mt-4 space-y-2 text-slate-700">
+          <li>• Поддерживающая (еженедельно/раз в две недели)</li>
+          <li>• Генеральная (раз в месяц/квартал)</li>
+          <li>• После ремонта (глубокая очистка)</li>
+        </ul>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a href="#contacts" class="px-5 py-3 rounded-xl bg-brand-700 text-white font-semibold hover:bg-brand-800">Заказать уборку</a>
+          <a href="#pricing" class="px-5 py-3 rounded-xl border border-slate-300 font-semibold hover:bg-slate-50">Смотреть цены</a>
+        </div>
+      </div>
+      <div class="order-1 md:order-2">
+        <div class="aspect-[4/3] w-full rounded-2xl bg-slate-100 shadow-soft grid place-items-center text-slate-400">Фото позже</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Offices -->
+  <section id="offices" class="bg-slate-50">
+    <div class="max-w-7xl mx-auto container-px py-16 grid md:grid-cols-2 gap-10 items-center">
+      <div>
+        <div class="aspect-[4/3] w-full rounded-2xl bg-slate-100 shadow-soft grid place-items-center text-slate-400">Фото позже</div>
+      </div>
+      <div>
+        <h2 class="text-3xl font-extrabold tracking-tight">Офисы и коммерческие помещения</h2>
+        <p class="mt-4 text-slate-700">Поддерживаем презентабельность офисов, салонов, магазинов, производственных помещений. Работаем до или после вашей смены, с учётом графика сотрудников.</p>
+        <ul class="mt-4 space-y-2 text-slate-700">
+          <li>• Ежедневная/еженедельная уборка</li>
+          <li>• Разовые выезды перед событиями</li>
+          <li>• Послестроительная уборка</li>
+        </ul>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a href="#contacts" class="px-5 py-3 rounded-xl bg-brand-700 text-white font-semibold hover:bg-brand-800">Оставить заявку</a>
+          <a href="#pricing" class="px-5 py-3 rounded-xl border border-slate-300 font-semibold hover:bg-slate-50">Запросить прайс</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dry clean -->
+  <section id="dryclean" class="bg-white">
+    <div class="max-w-7xl mx-auto container-px py-16">
+      <div class="max-w-3xl">
+        <h2 class="text-3xl font-extrabold tracking-tight">Химчистка и доп. услуги</h2>
+        <p class="mt-4 text-slate-700">Деликатная химчистка мягкой мебели и ковров, паровая дезинфекция детских и зооуглов, мытьё окон и витражей, уборка после мероприятий, помощь по дому (глажка, смена постельного белья).</p>
+      </div>
+      <div class="mt-8 grid md:grid-cols-3 gap-6">
+        <div class="p-6 rounded-2xl border border-slate-200 bg-slate-50">Диван — от 1500 ₽</div>
+        <div class="p-6 rounded-2xl border border-slate-200 bg-slate-50">Кресло — от 900 ₽</div>
+        <div class="p-6 rounded-2xl border border-slate-200 bg-slate-50">Ковер — от 200 ₽/м²</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process -->
+  <section class="bg-slate-50">
+    <div class="max-w-7xl mx-auto container-px py-16">
+      <h2 class="text-3xl font-extrabold tracking-tight">Как мы работаем</h2>
+      <div class="mt-8 grid md:grid-cols-4 gap-6">
+        <div class="p-6 bg-white rounded-2xl border border-slate-200 shadow-soft">
+          <div class="text-2xl font-extrabold">1</div>
+          <div class="mt-2 font-bold">Заявка</div>
+          <div class="text-slate-700">Звонок/мессенджер, уточняем детали, подбираем время.</div>
+        </div>
+        <div class="p-6 bg-white rounded-2xl border border-slate-200 shadow-soft">
+          <div class="text-2xl font-extrabold">2</div>
+          <div class="mt-2 font-bold">Выезд</div>
+          <div class="text-slate-700">Приезжаем вовремя со всеми средствами и инвентарём.</div>
+        </div>
+        <div class="p-6 bg-white rounded-2xl border border-slate-200 shadow-soft">
+          <div class="text-2xl font-extrabold">3</div>
+          <div class="mt-2 font-bold">Уборка</div>
+          <div class="text-slate-700">Работаем по чек‑листам, бережно относимся к вещам.</div>
+        </div>
+        <div class="p-6 bg-white rounded-2xl border border-slate-200 shadow-soft">
+          <div class="text-2xl font-extrabold">4</div>
+          <div class="mt-2 font-bold">Приёмка и оплата</div>
+          <div class="text-slate-700">Показываем результат, принимаем оплату любым способом.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Social proof -->
+  <section class="bg-white">
+    <div class="max-w-7xl mx-auto container-px py-16">
+      <h2 class="text-3xl font-extrabold tracking-tight">Отзывы клиентов</h2>
+      <div class="mt-8 grid md:grid-cols-3 gap-6">
+        <figure class="p-6 rounded-2xl border border-slate-200 shadow-soft">
+          <blockquote class="text-slate-800">«Заказали генеральную после ремонта. Приехали вовремя, всё отмыли до блеска. Теперь берём поддерживающую раз в неделю.»</blockquote>
+          <figcaption class="mt-4 text-sm text-slate-600">— Анна, Москва</figcaption>
+        </figure>
+        <figure class="p-6 rounded-2xl border border-slate-200 shadow-soft">
+          <blockquote class="text-slate-800">«Офис сияет, сотрудники довольны. График подстроили под нас, работаем без простоев.»</blockquote>
+          <figcaption class="mt-4 text-sm text-slate-600">— Игорь, управляющий</figcaption>
+        </figure>
+        <figure class="p-6 rounded-2xl border border-slate-200 shadow-soft">
+          <blockquote class="text-slate-800">«Химчистка дивана спасла от пятен после вечеринки. Быстро и аккуратно.»</blockquote>
+          <figcaption class="mt-4 text-sm text-slate-600">— Дарья, Химки</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section id="pricing" class="bg-slate-50">
+    <div class="max-w-7xl mx-auto container-px py-16">
+      <h2 class="text-3xl font-extrabold tracking-tight">Цены</h2>
+      <p class="mt-4 text-slate-700">Ниже — ориентировочные цены. Точная стоимость зависит от метража и состояния. Сообщите параметры — рассчитаем за 2 минуты.</p>
+
+      <div class="mt-8 grid lg:grid-cols-3 gap-6">
+        <!-- Квартира/Дом -->
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-soft p-6 flex flex-col">
+          <h3 class="text-xl font-bold">Квартира / Дом</h3>
+          <div class="mt-1 text-slate-600 text-sm">поддерживающая/генеральная</div>
+          <div class="mt-4 text-3xl font-extrabold">от 2500 ₽</div>
+          <ul class="mt-4 space-y-2 text-slate-700 text-sm flex-1">
+            <li>• Пыль, полы, кухня, санузлы</li>
+            <li>• Мытьё посуды/техники снаружи</li>
+            <li>• Вынос мусора</li>
+          </ul>
+          <a href="#contacts" class="mt-6 inline-flex justify-center px-5 py-3 rounded-xl bg-leaf-400 text-white font-semibold hover:bg-leaf-600">Заказать</a>
+        </div>
+        <!-- Офисы -->
+        <div class="bg-white rounded-2xl border-2 border-brand-200 shadow-soft p-6 flex flex-col">
+          <div class="inline-flex items-center gap-2 text-xs font-semibold text-brand-700 bg-brand-100 px-2 py-1 rounded-full self-start">Популярно</div>
+          <h3 class="mt-2 text-xl font-bold">Офисы и помещения</h3>
+          <div class="mt-1 text-slate-600 text-sm">ежедневная/разовая</div>
+          <div class="mt-4 text-3xl font-extrabold">от 3000 ₽</div>
+          <ul class="mt-4 space-y-2 text-slate-700 text-sm flex-1">
+            <li>• Рабочие места, переговорные</li>
+            <li>• Санузлы, кухня/кофепоинт</li>
+            <li>• Расходники по запросу</li>
+          </ul>
+          <a href="#contacts" class="mt-6 inline-flex justify-center px-5 py-3 rounded-xl bg-brand-700 text-white font-semibold hover:bg-brand-800">Оставить заявку</a>
+        </div>
+        <!-- Химчистка / Доп -->
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-soft p-6 flex flex-col">
+          <h3 class="text-xl font-bold">Химчистка / Доп. услуги</h3>
+          <div class="mt-1 text-slate-600 text-sm">мебель, ковры, окна</div>
+          <div class="mt-4 text-3xl font-extrabold">от 900 ₽</div>
+          <ul class="mt-4 space-y-2 text-slate-700 text-sm flex-1">
+            <li>• Диваны/кресла/ковры</li>
+            <li>• Мытьё окон и витражей</li>
+            <li>• Паровая дезинфекция</li>
+          </ul>
+          <a href="#contacts" class="mt-6 inline-flex justify-center px-5 py-3 rounded-xl border border-slate-300 font-semibold hover:bg-slate-50">Уточнить цену</a>
+        </div>
+      </div>
+
+      <!-- FAQ -->
+      <div class="mt-12 max-w-3xl">
+        <h3 class="text-xl font-extrabold">Частые вопросы</h3>
+        <div class="mt-4 divide-y divide-slate-200 border border-slate-200 rounded-2xl">
+          <details class="group p-4">
+            <summary class="flex cursor-pointer list-none items-center justify-between font-medium">С какими средствами работаете?
+              <span class="transition group-open:rotate-180">⌄</span>
+            </summary>
+            <p class="mt-2 text-slate-700">Используем безопасные сертифицированные составы. По запросу — гипоаллергенные и эко‑средства.</p>
+          </details>
+          <details class="group p-4">
+            <summary class="flex cursor-pointer list-none items-center justify-between font-medium">Как рассчитывается цена?
+              <span class="transition group-open:rotate-180">⌄</span>
+            </summary>
+            <p class="mt-2 text-slate-700">Зависит от метража, состояния и дополнительных работ. Сообщите параметры — пришлём смету в мессенджер.</p>
+          </details>
+          <details class="group p-4">
+            <summary class="flex cursor-pointer list-none items-center justify-between font-medium">Есть ли гарантия?
+              <span class="transition group-open:rotate-180">⌄</span>
+            </summary>
+            <p class="mt-2 text-slate-700">Да, если что‑то упустили — бесплатно приедем и исправим в ближайшее время.</p>
+          </details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contacts -->
+  <section id="contacts" class="bg-white">
+    <div class="max-w-7xl mx-auto container-px py-16 grid lg:grid-cols-2 gap-10 items-start">
+      <div>
+        <h2 class="text-3xl font-extrabold tracking-tight">Контакты</h2>
+        <p class="mt-4 text-slate-700">Напишите в мессенджер или позвоните — ответим в течение 10 минут и предложим свободные слоты на сегодня/завтра.</p>
+        <div class="mt-6 grid sm:grid-cols-2 gap-4">
+          <a href="tel:+7XXXXXXXXXX" class="p-5 rounded-2xl bg-brand-700 text-white font-semibold shadow-soft hover:bg-brand-800 flex items-center justify-center">Позвонить: +7 (___) ___‑__‑__</a>
+          <a href="https://wa.me/7XXXXXXXXXX" class="p-5 rounded-2xl border border-slate-300 font-semibold hover:bg-slate-50 flex items-center justify-center">Написать в WhatsApp</a>
+        </div>
+        <div class="mt-6 text-sm text-slate-600">Работаем: Пн–Вс 8:00–22:00 • Москва и область</div>
+        <div class="mt-6 p-4 bg-slate-50 rounded-2xl border border-slate-200">
+          <div class="font-semibold">Юридическая информация</div>
+          <div class="text-sm text-slate-600 mt-1">«Служба Чистоты», ИНН/ОГРН — укажем позже. Договор‑оферта и политика конфиденциальности — добавить ссылками.</div>
+        </div>
+      </div>
+
+      <form class="bg-slate-50 border border-slate-200 rounded-2xl p-6 shadow-soft" onsubmit="event.preventDefault(); alert('Спасибо! Мы свяжемся с вами в ближайшее время.'); this.reset();">
+        <h3 class="text-xl font-extrabold">Быстрая заявка</h3>
+        <div class="mt-4 grid sm:grid-cols-2 gap-4">
+          <div>
+            <label class="text-sm text-slate-600">Имя</label>
+            <input required type="text" class="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 focus:outline-none focus:ring-4 focus:ring-brand-200" placeholder="Иван" />
+          </div>
+          <div>
+            <label class="text-sm text-slate-600">Телефон</label>
+            <input required type="tel" class="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 focus:outline-none focus:ring-4 focus:ring-brand-200" placeholder="+7 ___ ___‑__‑__" />
+          </div>
+          <div class="sm:col-span-2">
+            <label class="text-sm text-slate-600">Тип уборки</label>
+            <select class="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 focus:outline-none focus:ring-4 focus:ring-brand-200">
+              <option>Квартира/дом — поддерживающая</option>
+              <option>Квартира/дом — генеральная</option>
+              <option>Квартира/дом — после ремонта</option>
+              <option>Офис/помещение — регулярная</option>
+              <option>Офис/помещение — разовая</option>
+              <option>Химчистка мебели/ковров</option>
+              <option>Мытьё окон</option>
+            </select>
+          </div>
+          <div class="sm:col-span-2">
+            <label class="text-sm text-slate-600">Адрес/комментарий</label>
+            <textarea rows="4" class="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 focus:outline-none focus:ring-4 focus:ring-brand-200" placeholder="Город, район, желаемая дата и время, особенности…"></textarea>
+          </div>
+          <div class="sm:col-span-2 flex items-start gap-2 text-sm text-slate-600">
+            <input type="checkbox" required class="mt-1" />
+            <span>Согласие на обработку персональных данных</span>
+          </div>
+          <button class="sm:col-span-2 mt-2 inline-flex justify-center px-5 py-3 rounded-xl bg-leaf-400 text-white font-semibold hover:bg-leaf-600">Отправить заявку</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-slate-900 text-slate-200">
+    <div class="max-w-7xl mx-auto container-px py-12 grid md:grid-cols-4 gap-8">
+      <div>
+        <div class="font-extrabold text-white text-lg">Служба Чистоты</div>
+        <p class="mt-2 text-sm text-slate-400">Уборка квартир, домов и офисов в Москве и области. Работаем ежедневно с 8:00 до 22:00.</p>
+      </div>
+      <div>
+        <div class="font-semibold">Услуги</div>
+        <ul class="mt-2 space-y-1 text-sm text-slate-300">
+          <li><a href="#flats" class="hover:text-white">Квартиры и дома</a></li>
+          <li><a href="#offices" class="hover:text-white">Офисы и помещения</a></li>
+          <li><a href="#dryclean" class="hover:text-white">Химчистка и доп. услуги</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="font-semibold">Компания</div>
+        <ul class="mt-2 space-y-1 text-sm text-slate-300">
+          <li><a href="#about" class="hover:text-white">О нас</a></li>
+          <li><a href="#pricing" class="hover:text-white">Цены</a></li>
+          <li><a href="#contacts" class="hover:text-white">Контакты</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="font-semibold">Связь</div>
+        <ul class="mt-2 space-y-1 text-sm text-slate-300">
+          <li><a href="tel:+7XXXXXXXXXX" class="hover:text-white">+7 (___) ___‑__‑__</a></li>
+          <li><a href="mailto:info@example.ru" class="hover:text-white">info@example.ru</a></li>
+          <li><a href="https://wa.me/7XXXXXXXXXX" class="hover:text-white">WhatsApp</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="border-t border-slate-800 py-6 text-center text-xs text-slate-500">© <span id="y"></span> «Служба Чистоты». Все права защищены.</div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Mobile menu toggle
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    if (menuBtn) menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+    // Year
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Служба Чистоты",
+    "description": "Клининг в Москве и области: квартиры, дома, офисы, химчистка мебели и ковров.",
+    "areaServed": "Москва и Московская область",
+    "telephone": "+7XXXXXXXXXX",
+    "image": "/placeholder-social.jpg",
+    "openingHours": "Mo-Su 08:00-22:00",
+    "url": "https://example.ru"
+  }
+  </script>
+</body>
+</html>
