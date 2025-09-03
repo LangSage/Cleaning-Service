@@ -559,15 +559,7 @@
        этот блок преобразует его в относительный к подпапке.
        Можно удалить, когда все пути будут относительными.
     ===================================================================== */
-    (function (prefix) {
-      document.querySelectorAll('img[src^="/"],script[src^="/"],link[href^="/"]').forEach(el => {
-        if (el.tagName === 'LINK') {
-          el.href = prefix + el.getAttribute('href').slice(1);
-        } else {
-          el.src = prefix + el.getAttribute('src').slice(1);
-        }
-      });
-    })("/Cleaning-Service/");
+  
   </script>
 </body>
 </html>
