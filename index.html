@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
   <title>Служба Чистоты — уборка квартир, домов и офисов в Москве и области</title>
-  <meta name="description" content="Профессиональная уборка квартир, домов и офисов в Москве и области. Быстрый выезд, прозрачные цены, гарантия качества. Звоните: +790997687910." />
+  <meta name="description" content="Профессиональная уборка квартир, домов и офисов в Москве и области. Быстрый выезд, прозрачные цены, гарантия качества. Звоните: +79099768791." />
   <meta property="og:title" content="Служба Чистоты — клининговая компания" />
   <meta property="og:description" content="Уберём квартиру, дом или офис — аккуратно, безопасно и вовремя." />
   <meta property="og:type" content="website" />
@@ -36,41 +36,49 @@
     .ph{background-image:linear-gradient(135deg,#f1f5f9 0%,#e2e8f0 100%)}
     section[id]{scroll-margin-top:96px}
 
-    /* Responsive tables: компактно на телефонах, без горизонтального скролла */
+    /* Responsive tables: компактно на телефонах, без горизонтального скролла и с ровным выравниванием */
     table.responsive{width:100%; border-collapse:collapse}
     table.responsive th, table.responsive td{white-space:normal; word-break:break-word}
+    table.responsive thead th{background:#eff6ff} /* brand-50 */
+
     @media (max-width: 640px){
       table.responsive thead{display:none}
       table.responsive, table.responsive tbody, table.responsive tr, table.responsive td{display:block; width:100%}
       table.responsive tr{
-        background:white;
+        background:#fff;
         border:1px solid #e2e8f0; /* slate-200 */
         border-radius:0.75rem;     /* rounded-xl */
         box-shadow:0 10px 25px -5px rgba(0,0,0,.05);
         padding:10px 12px;
         margin-bottom:12px;
       }
+      /* Строчки выровнены: слева ярлык, справа значение на одной линии */
       table.responsive td{
         display:flex;
+        justify-content:space-between;
         align-items:flex-start;
         gap:10px;
         padding:6px 0;
         border:none;
         font-size:0.95rem;
-        line-height:1.2rem;
+        line-height:1.25rem;
+        text-align:right; /* значение прижимается вправо */
       }
       table.responsive td:first-child{
+        justify-content:flex-start;
+        text-align:left;
         font-weight:700;
         font-size:1rem;
         padding-top:2px;
       }
       table.responsive td:not(:first-child)::before{
         content:attr(data-th);
-        min-width:9rem;
-        max-width:50%;
+        flex:0 0 auto;
+        min-width:7.5rem;  /* компактно на телефонах */
+        max-width:55%;
         font-weight:600;
         color:#64748b; /* slate-500 */
-        flex:0 0 auto;
+        text-align:left;
       }
       table.responsive td:last-child{margin-bottom:0}
     }
@@ -87,7 +95,7 @@
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M20.52 3.48A11.94 11.94 0 0 0 12.01 0 11.99 11.99 0 0 0 0 12c0 2.11.55 4.11 1.6 5.91L0 24l6.22-1.63A12 12 0 0 0 12.01 24C18.63 24 24 18.63 24 12c0-3.2-1.25-6.21-3.48-8.52ZM12 22.05c-1.92 0-3.79-.54-5.41-1.57l-.39-.24-3.69.97.99-3.6-.25-.41A9.93 9.93 0 0 1 1.95 12 10.05 10.05 0 0 1 12 1.95 10.05 10.05 0 0 1 22.05 12 10.05 10.05 0 0 1 12 22.05Zm5.7-7.44c-.31-.16-1.82-.9-2.1-1-.27-.1-.47-.16-.66.16-.2.32-.76 1-.93 1.21-.17.21-.34.24-.65.08-.31-.16-1.3-.48-2.47-1.53-.91-.8-1.53-1.78-1.71-2.09-.18-.31-.02-.48.14-.64.15-.15.31-.39.46-.59.15-.2.2-.34.31-.57.1-.24.05-.43-.02-.59-.08-.16-.66-1.59-.91-2.18-.24-.58-.49-.5-.66-.51l-.57-.01c-.2 0-.51.07-.77.34-.26.27-1 1-1 2.44s1.02 2.83 1.16 3.03c.14.2 2 3.06 4.84 4.29.68.3 1.21.48 1.62.62.68.22 1.3.19 1.8.12.55-.08 1.82-.74 2.08-1.45.26-.71.26-1.31.18-1.44-.08-.13-.28-.21-.59-.37Z"/></svg>
           <span class="hidden sm:inline">WhatsApp</span>
         </a>
-        <a class="font-semibold" href="tel:+790997687910">+790997687910</a>
+        <a class="font-semibold" href="tel:+79099768791">+79099768791</a>
       </div>
     </div>
   </div>
@@ -243,10 +251,24 @@
           <div>
             <h3 class="font-bold text-lg">После ремонта</h3>
             <ul class="mt-2 list-disc list-inside text-slate-700 space-y-1">
-              <li>Сбор и вынос мелкого строительного мусора (до ~7 кг).</li>
-              <li>Удаление строительной пыли со всех поверхностей (стены, пол, потолок до 3 м).</li>
-              <li>Удаление следов клея, шпаклёвки, цемента, побелки.</li>
-              <li>Отмывка плитки, подоконников, радиаторов, стекла/зеркал.</li>
+              <li>Сбор и удаление мелкого строительного мусора (до 7 кг).</li>
+              <li>Пылесосим и протираем помещения от пыли (стены, пол).</li>
+              <li>Очищение потолка от пыли со стремянки (до 3 метров) <span class="text-xs text-slate-500">(за дополнительную стоимость)</span>.</li>
+              <li>Влажное удаление пыли и грязи с полов, стен, плинтусов.</li>
+              <li>Очистка поверхностей квартиры от загрязнений: следы клея, лака, побелки, шпаклёвки, цемента, строительной пыли.</li>
+              <li>Удаление загрязнений с кафельной плитки.</li>
+              <li>Чистка подоконников и карнизов.</li>
+              <li>Мытьё и удаление пыли с отопительных труб и батарей.</li>
+              <li>Мойка и удаление пыли с дверных блоков.</li>
+              <li>Отмываем пыль и следы скотча с розеток и выключателей.</li>
+              <li>Влажная и сухая чистка осветительных приборов — 2 шт. <span class="text-xs text-slate-500">(больше — за доп. стоимость)</span>.</li>
+              <li>Очистка зеркальных и стеклянных поверхностей.</li>
+              <li>Чистка ванных комнат: влажная уборка стен, протирка мебели внутри и снаружи; мытьё ванны/душевой кабины, унитаза, биде, раковины, смесителей + обеспыливание потолков + мытьё вентиляционной вытяжки.</li>
+              <li>Удаление пыли со всех внешних и внутренних поверхностей мебели <span class="text-xs text-slate-500">(внутри — за дополнительную стоимость)</span>.</li>
+              <li>Вакуумная чистка мягкой мебели и ковров.</li>
+              <li>Кухня: очищение кафеля на стенах и полах, удаление послестроительной пыли; внешняя и внутренняя чистка мебели и кухонного гарнитура; чистка духового шкафа и микроволновки; чистка плиты; мытьё сантехники; мытьё вентиляционной вытяжки.</li>
+              <li>Мойка 3-створчатого окна (с откосом, подоконником и рамой) <span class="text-xs text-slate-500">(за дополнительную стоимость)</span>.</li>
+              <li>Мытьё входной двери с двух сторон <span class="text-xs text-slate-500">(за дополнительную стоимость)</span>.</li>
             </ul>
           </div>
         </div>
@@ -293,104 +315,23 @@
   <section id="pricing" class="bg-slate-50">
     <div class="max-w-7xl mx-auto container-px py-16">
       <h2 class="text-3xl font-extrabold tracking-tight">Цены</h2>
-      <p class="mt-4 text-slate-700">Актуальный прайс по данным из файла. Таблицы всегда открыты и компактны на телефонах.</p>
+      <p class="mt-4 text-slate-700">Актуальный прайс. Таблицы всегда открыты и компактны на телефонах.</p>
 
-      <div class="mt-8 grid gap-6">
+      <!-- Поиск по ценам -->
+      <div class="mt-6 flex flex-col sm:flex-row gap-3 items-stretch sm:items-center">
+        <input id="priceSearch" type="search" inputmode="search"
+               placeholder="Поиск по услуге, площади или цене… (напр. 60 м², >5000, витрины)"
+               class="flex-1 rounded-xl border border-slate-300 px-3 py-2 focus:outline-none focus:ring-4 focus:ring-brand-200" />
+        <button id="clearSearch"
+                class="px-4 py-2 rounded-xl border border-slate-300 hover:bg-slate-50">
+          Сбросить
+        </button>
+      </div>
+      <div id="searchStat" class="mt-2 text-sm text-slate-500" aria-live="polite"></div>
 
-        <!-- ОФИСЫ -->
-        <section id="cat-Офисы" class="bg-white rounded-2xl border border-slate-200 shadow-soft">
-          <div class="px-6 pt-4 pb-2 flex items-center justify-between">
-            <h3 class="text-lg font-semibold">🏢 Офисы: ежемесячные тарифы</h3>
-          </div>
-          <div class="px-2 pb-4">
-            <table class="responsive text-sm border-t border-slate-200">
-              <thead class="bg-brand-50 text-slate-700">
-                <tr>
-                  <th class="text-left px-4 py-2">Диапазон, м²</th>
-                  <th class="text-left px-4 py-2">Генеральная (руб/м²)</th>
-                  <th class="text-left px-4 py-2">После ремонта (руб/м²)</th>
-                  <th class="text-left px-4 py-2">Комплексная (руб/м²)</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="odd:bg-white even:bg-slate-50 hover:bg-slate-100">
-                  <td class="px-4 py-2" data-th="Диапазон, м²">50-100</td>
-                  <td class="px-4 py-2" data-th="Генеральная (руб/м²)">от 128 руб</td>
-                  <td class="px-4 py-2" data-th="После ремонта (руб/м²)">от 138 руб</td>
-                  <td class="px-4 py-2" data-th="Комплексная (руб/м²)">от 50 руб</td>
-                </tr>
-                <tr class="odd:bg-white even:bg-slate-50 hover:bg-slate-100">
-                  <td class="px-4 py-2" data-th="Диапазон, м²">200-400</td>
-                  <td class="px-4 py-2" data-th="Генеральная (руб/м²)">от 98 руб </td>
-                  <td class="px-4 py-2" data-th="После ремонта (руб/м²)">от  121 руб</td>
-                  <td class="px-4 py-2" data-th="Комплексная (руб/м²)">от 45 руб</td>
-                </tr>
-                <tr class="odd:bg-white even:bg-slate-50 hover:bg-slate-100">
-                  <td class="px-4 py-2" data-th="Диапазон, м²">500-1000</td>
-                  <td class="px-4 py-2" data-th="Генеральная (руб/м²)">от 81 руб</td>
-                  <td class="px-4 py-2" data-th="После ремонта (руб/м²)">от 98 руб</td>
-                  <td class="px-4 py-2" data-th="Комплексная (руб/м²)">от 40 руб</td>
-                </tr>
-                <tr class="odd:bg-white even:bg-slate-50 hover:bg-slate-100">
-                  <td class="px-4 py-2" data-th="Диапазон, м²">2000-4000</td>
-                  <td class="px-4 py-2" data-th="Генеральная (руб/м²)">от 71 руб </td>
-                  <td class="px-4 py-2" data-th="После ремонта (руб/м²)">от 86 руб </td>
-                  <td class="px-4 py-2" data-th="Комплексная (руб/м²)">от 35 руб</td>
-                </tr>
-                <tr class="odd:bg-white even:bg-slate-50 hover:bg-slate-100">
-                  <td class="px-4 py-2" data-th="Диапазон, м²">от 5000</td>
-                  <td class="px-4 py-2" data-th="Генеральная (руб/м²)">от 65 руб </td>
-                  <td class="px-4 py-2" data-th="После ремонта (руб/м²)">от 75 руб</td>
-                  <td class="px-4 py-2" data-th="Комплексная (руб/м²)">от 30 руб </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </section>
+      <div class="mt-6 grid gap-6">
 
-        <!-- МЫТЬЁ ОКОН -->
-        <section id="cat-Мытьё окон" class="bg-white rounded-2xl border border-slate-200 shadow-soft">
-          <div class="px-6 pt-4 pb-2 flex items-center justify-between">
-            <h3 class="text-lg font-semibold">🪟 Мытьё окон</h3>
-          </div>
-          <div class="px-2 pb-4">
-            <table class="responsive text-sm border-t border-slate-200">
-              <thead class="bg-brand-50 text-slate-700">
-                <tr>
-                  <th class="text-left px-4 py-2">Услуга</th>
-                  <th class="text-left px-4 py-2">Цена</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="odd:bg-white even:bg-slate-50 hover:bg-slate-100"><td class="px-4 py-2" data-th="Услуга">1-створчатое (со всех сторон)</td><td class="px-4 py-2" data-th="Цена">от 400 руб</td></tr>
-                <tr class="odd:bg-white even:bg-slate-50 hover:bg-slate-100"><td class="px-4 py-2" data-th="Услуга">2-створчатое (со всех сторон)</td><td class="px-4 py-2" data-th="Цена">от 650 руб</td></tr>
-                <tr class="odd:bg-white even:bg-slate-50 hover:bg-slate-100"><td class="px-4 py-2" data-th="Услуга">3-створчатое (со всех сторон)</td><td class="px-4 py-2" data-th="Цена">от 750 руб</td></tr>
-                <tr class="odd:bg-white even:bg-slate-50 hover:bg-slate-100"><td class="px-4 py-2" data-th="Услуга">Мойка москитной сетки</td><td class="px-4 py-2" data-th="Цена">от 130 руб</td></tr>
-                <tr class="odd:bg-white even:bg-slate-50 hover:bg-slate-100"><td class="px-4 py-2" data-th="Услуга">Мойка жалюзи (пластик, металл)</td><td class="px-4 py-2" data-th="Цена">от 160 руб</td></tr>
-                <tr class="odd:bg-white even:bg-slate-50 hover:bg-slate-100"><td class="px-4 py-2" data-th="Услуга">Мойка жалюзи (ткань)</td><td class="px-4 py-2" data-th="Цена">от 370 руб</td></tr>
-                <tr class="odd:bg-white even:bg-slate-50 hover:bg-slate-100"><td class="px-4 py-2" data-th="Услуга">Окно+балконная дверь</td><td class="px-4 py-2" data-th="Цена">от 370 руб</td></tr>
-                <tr class="odd:bg-white even:bg-slate-50 hover:bg-slate-100"><td class="px-4 py-2" data-th="Услуга">Лоджии и балконы</td><td class="px-4 py-2" data-th="Цена">от 800 пог. метр</td></tr>
-                <tr class="odd:bg-white even:bg-slate-50 hover:bg-slate-100"><td class="px-4 py-2" data-th="Услуга">Окна больших размеров</td><td class="px-4 py-2" data-th="Цена">от 1500 пог.метр </td></tr>
-                <tr class="odd:bg-white even:bg-slate-50 hover:bg-slate-100"><td class="px-4 py-2" data-th="Услуга">После ремонта и монтажа</td><td class="px-4 py-2" data-th="Цена">от 400 </td></tr>
-          <tr class="odd:bg-white even:bg-slate-50 hover:bg-slate-100">
-  <td class="px-4 py-2" data-th="Услуга">Витрины ресторанов, магазинов, кафе</td>
-  <td class="px-4 py-2" data-th="Цена">от 45 руб/м²</td>
-</tr>
-<tr class="odd:bg-white even:bg-slate-50 hover:bg-slate-100">
-  <td class="px-4 py-2" data-th="Услуга">Мытьё сплошного фасадного остекления с установкой</td>
-  <td class="px-4 py-2" data-th="Цена">от 25 руб/м²</td>
-</tr>
-<tr class="odd:bg-white even:bg-slate-50 hover:bg-slate-100">
-  <td class="px-4 py-2" data-th="Услуга">Мытьё сплошного фасадного остекления с автовышкой</td>
-  <td class="px-4 py-2" data-th="Цена">по согласованию</td>
-</tr>
-></tr>
-              </tbody>
-            </table>
-          </div>
-        </section>
-
-        <!-- КВАРТИРЫ (фиксированные цены из таблицы) -->
+        <!-- КВАРТИРЫ -->
         <section id="cat-Квартиры" class="bg-white rounded-2xl border border-slate-200 shadow-soft">
           <div class="px-6 pt-4 pb-2 flex items-center justify-between">
             <h3 class="text-lg font-semibold">🏠 Квартиры</h3>
@@ -482,6 +423,98 @@
           </div>
         </section>
 
+        <!-- ОФИСЫ -->
+        <section id="cat-Офисы" class="bg-white rounded-2xl border border-slate-200 shadow-soft">
+          <div class="px-6 pt-4 pb-2 flex items-center justify-between">
+            <h3 class="text-lg font-semibold">🏢 Офисы: ежемесячные тарифы</h3>
+          </div>
+          <div class="px-2 pb-4">
+            <table class="responsive text-sm border-t border-slate-200">
+              <thead class="bg-brand-50 text-slate-700">
+                <tr>
+                  <th class="text-left px-4 py-2">Диапазон, м²</th>
+                  <th class="text-left px-4 py-2">Генеральная (руб/м²)</th>
+                  <th class="text-left px-4 py-2">После ремонта (руб/м²)</th>
+                  <th class="text-left px-4 py-2">Комплексная (руб/м²)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="odd:bg-white even:bg-slate-50 hover:bg-slate-100">
+                  <td class="px-4 py-2" data-th="Диапазон, м²">50-100</td>
+                  <td class="px-4 py-2" data-th="Генеральная (руб/м²)">от 128 руб</td>
+                  <td class="px-4 py-2" data-th="После ремонта (руб/м²)">от 138 руб</td>
+                  <td class="px-4 py-2" data-th="Комплексная (руб/м²)">от 50 руб</td>
+                </tr>
+                <tr class="odd:bg-white even:bg-slate-50 hover:bg-slate-100">
+                  <td class="px-4 py-2" data-th="Диапазон, м²">200-400</td>
+                  <td class="px-4 py-2" data-th="Генеральная (руб/м²)">от 98 руб</td>
+                  <td class="px-4 py-2" data-th="После ремонта (руб/м²)">от 121 руб</td>
+                  <td class="px-4 py-2" data-th="Комплексная (руб/м²)">от 45 руб</td>
+                </tr>
+                <tr class="odd:bg-white even:bg-slate-50 hover:bg-slate-100">
+                  <td class="px-4 py-2" data-th="Диапазон, м²">500-1000</td>
+                  <td class="px-4 py-2" data-th="Генеральная (руб/м²)">от 81 руб</td>
+                  <td class="px-4 py-2" data-th="После ремонта (руб/м²)">от 98 руб</td>
+                  <td class="px-4 py-2" data-th="Комплексная (руб/м²)">от 40 руб</td>
+                </tr>
+                <tr class="odd:bg-white even:bg-slate-50 hover:bg-slate-100">
+                  <td class="px-4 py-2" data-th="Диапазон, м²">2000-4000</td>
+                  <td class="px-4 py-2" data-th="Генеральная (руб/м²)">от 71 руб</td>
+                  <td class="px-4 py-2" data-th="После ремонта (руб/м²)">от 86 руб</td>
+                  <td class="px-4 py-2" data-th="Комплексная (руб/м²)">от 35 руб</td>
+                </tr>
+                <tr class="odd:bg-white even:bg-slate-50 hover:bg-slate-100">
+                  <td class="px-4 py-2" data-th="Диапазон, м²">от 5000</td>
+                  <td class="px-4 py-2" data-th="Генеральная (руб/м²)">от 65 руб</td>
+                  <td class="px-4 py-2" data-th="После ремонта (руб/м²)">от 75 руб</td>
+                  <td class="px-4 py-2" data-th="Комплексная (руб/м²)">от 30 руб</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- МЫТЬЁ ОКОН -->
+        <section id="cat-Мытьё окон" class="bg-white rounded-2xl border border-slate-200 shadow-soft">
+          <div class="px-6 pt-4 pb-2 flex items-center justify-between">
+            <h3 class="text-lg font-semibold">🪟 Мытьё окон</h3>
+          </div>
+          <div class="px-2 pb-4">
+            <table class="responsive text-sm border-t border-slate-200">
+              <thead class="bg-brand-50 text-slate-700">
+                <tr>
+                  <th class="text-left px-4 py-2">Услуга</th>
+                  <th class="text-left px-4 py-2">Цена</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="odd:bg-white even:bg-slate-50 hover:bg-slate-100"><td class="px-4 py-2" data-th="Услуга">1-створчатое (со всех сторон)</td><td class="px-4 py-2" data-th="Цена">от 400 руб</td></tr>
+                <tr class="odd:bg-white even:bg-slate-50 hover:bg-slate-100"><td class="px-4 py-2" data-th="Услуга">2-створчатое (со всех сторон)</td><td class="px-4 py-2" data-th="Цена">от 650 руб</td></tr>
+                <tr class="odd:bg-white even:bg-slate-50 hover:bg-slate-100"><td class="px-4 py-2" data-th="Услуга">3-створчатое (со всех сторон)</td><td class="px-4 py-2" data-th="Цена">от 750 руб</td></tr>
+                <tr class="odd:bg-white even:bg-slate-50 hover:bg-slate-100"><td class="px-4 py-2" data-th="Услуга">Мойка москитной сетки</td><td class="px-4 py-2" data-th="Цена">от 130 руб</td></tr>
+                <tr class="odd:bg-white even:bg-slate-50 hover:bg-slate-100"><td class="px-4 py-2" data-th="Услуга">Мойка жалюзи (пластик, металл)</td><td class="px-4 py-2" data-th="Цена">от 160 руб</td></tr>
+                <tr class="odd:bg-white even:bg-slate-50 hover:bg-slate-100"><td class="px-4 py-2" data-th="Услуга">Мойка жалюзи (ткань)</td><td class="px-4 py-2" data-th="Цена">от 370 руб</td></tr>
+                <tr class="odd:bg-white even:bg-slate-50 hover:bg-slate-100"><td class="px-4 py-2" data-th="Услуга">Окно+балконная дверь</td><td class="px-4 py-2" data-th="Цена">от 370 руб</td></tr>
+                <tr class="odd:bg-white even:bg-slate-50 hover:bg-slate-100"><td class="px-4 py-2" data-th="Услуга">Лоджии и балконы</td><td class="px-4 py-2" data-th="Цена">от 800 пог. метр</td></tr>
+                <tr class="odd:bg-white even:bg-slate-50 hover:bg-slate-100"><td class="px-4 py-2" data-th="Услуга">Окна больших размеров</td><td class="px-4 py-2" data-th="Цена">от 1500 пог. метр</td></tr>
+                <tr class="odd:bg-white even:bg-slate-50 hover:bg-slate-100"><td class="px-4 py-2" data-th="Услуга">После ремонта и монтажа</td><td class="px-4 py-2" data-th="Цена">от 400 руб</td></tr>
+                <tr class="odd:bg-white even:bg-slate-50 hover:bg-slate-100">
+                  <td class="px-4 py-2" data-th="Услуга">Витрины ресторанов, магазинов, кафе</td>
+                  <td class="px-4 py-2" data-th="Цена">от 45 руб/м²</td>
+                </tr>
+                <tr class="odd:bg-white even:bg-slate-50 hover:bg-slate-100">
+                  <td class="px-4 py-2" data-th="Услуга">Мытьё сплошного фасадного остекления с установкой</td>
+                  <td class="px-4 py-2" data-th="Цена">от 25 руб/м²</td>
+                </tr>
+                <tr class="odd:bg-white even:bg-slate-50 hover:bg-slate-100">
+                  <td class="px-4 py-2" data-th="Услуга">Мытьё сплошного фасадного остекления с автовышкой</td>
+                  <td class="px-4 py-2" data-th="Цена">по согласованию</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
       </div><!-- /.grid -->
 
       <!-- Дисклеймер цен -->
@@ -498,27 +531,24 @@
         <h2 class="text-3xl font-extrabold tracking-tight">Контакты</h2>
         <p class="mt-4 text-slate-700">Напишите в мессенджер или позвоните — ответим в течение 10 минут и предложим свободные слоты на сегодня/завтра.</p>
         <div class="mt-6 grid sm:grid-cols-2 gap-4">
-          <a href="tel:+790997687910" class="p-5 rounded-2xl bg-brand-700 text-white font-semibold shadow-soft hover:bg-brand-800 flex items-center justify-center">Позвонить: +790997687910</a>
+          <a href="tel:+79099768791" class="p-5 rounded-2xl bg-brand-700 text-white font-semibold shadow-soft hover:bg-brand-800 flex items-center justify-center">Позвонить: +79099768791</a>
           <a href="https://wa.me/79099768791?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%20%D1%83%D0%B1%D0%BE%D1%80%D0%BA%D1%83."
              class="p-5 rounded-2xl border border-slate-300 font-semibold hover:bg-slate-50 flex items-center justify-center">Написать в WhatsApp</a>
         </div>
-       <!-- Юридическая информация -->
-<div class="mt-6 p-4 bg-slate-50 rounded-2xl border border-slate-200">
-  <div class="font-semibold">Юридическая информация</div>
-  <ul class="mt-2 text-sm text-slate-600 space-y-1">
-    <li>ООО «Чистое сияние»</li>
-    <li>ИНН 9715514385 • ОГРН 1257700337597</li>
-    <li>Пн–Вс с 08:00 до 22:00</li>
-  </ul>
-  <div class="mt-3 text-sm text-slate-600">
-    Клиентам и партнёрам: <a class="text-brand-700 font-semibold" href="tel:+79099768791">+7 909 976-87-91</a>
-    <!-- TODO: добавить ссылку на почту, когда будет адрес.
-         Пример: <a href="mailto:you@domain.ru">you@domain.ru</a> -->
-  </div>
-  <div class="mt-3 text-sm text-slate-600">
-    Договор-оферта и политика конфиденциальности — добавить ссылками.
-  </div>
-</div>
+
+        <!-- Юридическая информация -->
+        <div class="mt-6 p-4 bg-slate-50 rounded-2xl border border-slate-200">
+          <div class="font-semibold">Юридическая информация</div>
+          <ul class="mt-2 text-sm text-slate-600 space-y-1">
+            <li>ООО «Чистое сияние»</li>
+            <li>ИНН 9715514385 • ОГРН 1257700337597</li>
+            <li>Пн–Вс с 08:00 до 22:00</li>
+          </ul>
+          <div class="mt-3 text-sm text-slate-600">
+            Клиентам и партнёрам: <a class="text-brand-700 font-semibold" href="tel:+79099768791">+7 909 976-87-91</a>
+            <!-- Почта появится позже: <a href="mailto:info@cleaning-moscow.ru">info@cleaning-moscow.ru</a> -->
+          </div>
+        </div>
       </div>
 
       <iframe name="gform_hidden" id="gform_hidden" style="display:none;"></iframe>
@@ -610,8 +640,8 @@
       <div>
         <div class="font-semibold">Связь</div>
         <ul class="mt-2 space-y-1 text-sm text-slate-300">
-          <li><a href="tel:+790997687910" class="hover:text-white">+790997687910</a></li>
-          <li><a href="mailto:info@example.ru" class="hover:text-white">info@example.ru</a></li>
+          <li><a href="tel:+79099768791" class="hover:text-white">+79099768791</a></li>
+          <li><a class="hover:text-white">info@example.ru</a></li>
           <li><a href="https://wa.me/79099768791?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%20%D1%83%D0%B1%D0%BE%D1%80%D0%BA%D1%83."
              class="hover:text-white">WhatsApp</a></li>
         </ul>
@@ -620,7 +650,7 @@
     <div class="border-t border-slate-800 py-6 text-center text-xs text-slate-500">© <span id="y"></span> «Служба Чистоты». Все права защищены.</div>
   </footer>
 
-  <!-- Minimal scripts -->
+  <!-- Scripts -->
   <script>
     // Mobile menu toggle
     const menuBtn = document.getElementById('menuBtn');
@@ -669,67 +699,121 @@
       });
     })();
 
-    // JSON-LD
-    const structured = {
-      "@context": "https://schema.org",
-      "@type": "LocalBusiness",
-      "name": "Служба Чистоты",
-      "description": "Клининг в Москве и области: квартиры, дома, офисы.",
-      "areaServed": "Москва и Московская область",
-      "telephone": "+790997687910",
-      "image": IMG.social || "placeholder-social.jpg",
-      "openingHours": "Mo-Su 08:00-22:00",
-      "url": "https://example.ru"
-    };
-    const ld = document.createElement('script'); ld.type = 'application/ld+json'; ld.textContent = JSON.stringify(structured); document.head.appendChild(ld);
-  </script>
+    // ==== УМНЫЙ ПОИСК ПО ЦЕНАМ ====
+    (function(){
+      const input = document.getElementById('priceSearch');
+      const clearBtn = document.getElementById('clearSearch');
+      const stat = document.getElementById('searchStat');
+      const tables = Array.from(document.querySelectorAll('#pricing table.responsive'));
 
-  <!-- Smooth scroll + scrollspy -->
-  <script>
-  (() => {
-    const header = document.querySelector('header');
-    const mobileMenu = document.getElementById('mobileMenu');
-    const OFFSET = (header ? header.offsetHeight : 72) + 8;
-
-    function smoothScrollToId(id) {
-      const el = document.getElementById(id);
-      if (!el) return;
-      const top = el.getBoundingClientRect().top + window.pageYOffset - OFFSET;
-      window.scrollTo({ top, behavior: 'smooth' });
-    }
-
-    document.addEventListener('click', (e) => {
-      const a = e.target.closest('a[href^="#"]');
-      if (!a) return;
-      const hash = a.getAttribute('href').slice(1);
-      const el = document.getElementById(hash);
-      if (el) {
-        e.preventDefault();
-        smoothScrollToId(hash);
-        history.pushState(null, '', '#' + hash);
-        if (mobileMenu && !mobileMenu.classList.contains('hidden')) mobileMenu.classList.add('hidden');
-      }
-    });
-
-    if (location.hash) setTimeout(() => smoothScrollToId(location.hash.replace('#','')), 50);
-
-    const navLinks = Array.from(document.querySelectorAll('header a[href^="#"], #mobileMenu a[href^="#"]'));
-    function setActive(id) {
-      navLinks.forEach(link => {
-        const isActive = link.getAttribute('href') === ('#' + id);
-        link.classList.toggle('text-brand-700', isActive);
-        link.classList.toggle('font-semibold', isActive);
-        link.classList.toggle('underline', isActive);
-        link.classList.toggle('underline-offset-4', isActive);
-        link.classList.toggle('decoration-2', isActive);
+      // Добавим строку "нет результатов" для каждой таблицы
+      tables.forEach(t => {
+        const tbody = t.querySelector('tbody');
+        if(!tbody) return;
+        const tr = document.createElement('tr');
+        tr.className = 'no-results hidden';
+        const td = document.createElement('td');
+        td.colSpan = t.querySelectorAll('thead th').length || 2;
+        td.className = 'px-4 py-3 text-slate-500';
+        td.textContent = 'Нет совпадений';
+        tr.appendChild(td);
+        tbody.appendChild(tr);
       });
-    }
-    const sections = Array.from(document.querySelectorAll('section[id]'));
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => { if (entry.isIntersecting) setActive(entry.target.id); });
-    }, { rootMargin: `-${OFFSET + 10}px 0px -60% 0px`, threshold: 0.01 });
-    sections.forEach(sec => observer.observe(sec));
-  })();
+
+      function norm(s){
+        return (s||'')
+          .toString()
+          .toLowerCase()
+          .replace(/ё/g,'е')
+          .replace(/\s+/g,' ')
+          .trim();
+      }
+
+      function extractNumbers(s){
+        // вернём все числа как float, игнорируя пробелы-разделители
+        const out = [];
+        const re = /\d[\d\s]*/g;
+        let m;
+        while((m = re.exec(s))!==null){
+          out.push(parseFloat(m[0].replace(/\s+/g,'')));
+        }
+        return out;
+      }
+
+      function cmpNumbers(nums, op, val){
+        if(!nums.length) return false;
+        if(op === '>')  return nums.some(n => n >  val);
+        if(op === '>=') return nums.some(n => n >= val);
+        if(op === '<')  return nums.some(n => n <  val);
+        if(op === '<=') return nums.some(n => n <= val);
+        return false;
+      }
+
+      function matches(row, q){
+        if(!q) return true;
+        const text = norm(row.innerText);
+        // Условия сравнения: >1000, >=5000, <90, <=60
+        const cmp = q.match(/^([<>]=?)\s*(\d+)\s*$/);
+        if(cmp){
+          const op = cmp[1];
+          const val = parseFloat(cmp[2]);
+          const nums = extractNumbers(row.innerText);
+          return cmpNumbers(nums, op, val);
+        }
+        // Диапазон: 50-100 или 50–100
+        const range = q.match(/^(\d+)\s*[-–]\s*(\d+)\s*$/);
+        if(range){
+          const a = parseFloat(range[1]), b = parseFloat(range[2]);
+          const ok = text.includes(`${range[1]}`) && text.includes(`${range[2]}`);
+          if(ok) return true;
+          // Также дадим шанс числам внутри строки
+          const nums = extractNumbers(row.innerText);
+          return nums.some(n => n>=Math.min(a,b) && n<=Math.max(a,b));
+        }
+        // Обычный поиск: все токены должны встретиться
+        const tokens = q.split(/\s+/).filter(Boolean);
+        return tokens.every(t => text.includes(t));
+      }
+
+      function applySearch(){
+        const q = norm(input.value);
+        let shown = 0, total = 0;
+
+        tables.forEach(t => {
+          const rows = Array.from(t.querySelectorAll('tbody tr')).filter(tr => !tr.classList.contains('no-results'));
+          const emptyRow = t.querySelector('tbody tr.no-results');
+          let visibleInTable = 0;
+          rows.forEach(r => {
+            total++;
+            const ok = matches(r, q);
+            r.classList.toggle('hidden', !ok);
+            if(ok) visibleInTable++;
+          });
+          if(emptyRow){
+            emptyRow.classList.toggle('hidden', visibleInTable !== 0);
+          }
+          shown += visibleInTable;
+        });
+
+        if(q){
+          stat.textContent = shown ? `Найдено позиций: ${shown}` : 'Совпадений не найдено';
+        } else {
+          stat.textContent = '';
+        }
+      }
+
+      if(input){
+        input.addEventListener('input', applySearch);
+        input.addEventListener('keydown', (e)=>{ if(e.key==='Escape'){ input.value=''; applySearch(); input.blur(); } });
+      }
+      if(clearBtn){
+        clearBtn.addEventListener('click', ()=>{
+          input.value = '';
+          applySearch();
+          input.focus();
+        });
+      }
+    })();
   </script>
 </body>
 </html>
