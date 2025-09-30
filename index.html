@@ -2,32 +2,82 @@
 <html lang="ru">
 <head>
   <meta charset="utf-8" />
+<head>
+  <!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=104336695', 'ym');
 
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    ym(104336695, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/104336695" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-  <title>Служба Чистоты — уборка квартир, домов и офисов в Москве и области</title>
-  <meta name="description" content="Профессиональная уборка квартир, домов и офисов в Москве и области. Быстрый выезд, прозрачные цены, гарантия качества. Звоните: +79099768791." />
-  <meta property="og:title" content="Служба Чистоты — клининговая компания" />
-  <meta property="og:description" content="Уберём квартиру, дом или офис — аккуратно, безопасно и вовремя." />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="placeholder-social.jpg" />
-  <link rel="icon" href="favicon.ico" />
+  <meta name="format-detection" content="telephone=yes">
+
+  <title>Уборка квартир, домов и офисов в Москве — «Служба Чистоты»</title>
+  <meta name="description" content="Профессиональная уборка в Москве и области: периодическая, генеральная, после ремонта, мойка окон, офисы. Работаем 08:00–22:00. Гарантия качества. Звоните: +7 909 976-87-91.">
+  <link rel="canonical" href="https://sluzhba-chistoty.ru/">
+  <link rel="alternate" hreflang="ru-RU" href="https://sluzhba-chistoty.ru/">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <meta name="theme-color" content="#0ea5e9">
+
+  <!-- Local signals (не обязательны, но можно оставить) -->
+  <meta name="geo.region" content="RU-MOW">
+  <meta name="geo.placename" content="Москва">
+  <meta name="geo.position" content="55.7558;37.6173">
+  <meta name="ICBM" content="55.7558, 37.6173">
+
+  <!-- Open Graph -->
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Служба Чистоты">
+  <meta property="og:url" content="https://sluzhba-chistoty.ru/">
+  <meta property="og:title" content="Уборка квартир, домов и офисов в Москве — «Служба Чистоты»">
+  <meta property="og:description" content="Периодическая, генеральная и послестроительная уборка. Окна и офисы. Работаем 08:00–22:00. Чек-листы и гарантия.">
+  <meta property="og:image" content="https://sluzhba-chistoty.ru/static/og/cleaning-cover.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Клининговая компания «Служба Чистоты» — уборка в Москве и области">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Уборка квартир и офисов • Москва — «Служба Чистоты»">
+  <meta name="twitter:description" content="Профи-уборка по чек-листам. Ежедневно 08:00–22:00. +7 909 976-87-91">
+  <meta name="twitter:image" content="https://sluzhba-chistoty.ru/static/og/cleaning-cover.jpg">
+
+  <!-- Verification -->
+  <meta name="yandex-verification" content="XXXXXX">
+  <meta name="google-site-verification" content="XXXXXX">
+
+  <!-- Icons & fonts -->
+  <link rel="icon" href="/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Tailwind (если используете CDN) -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       theme: {
         extend: {
           colors: {
-            brand: {50:'#f0f9ff',100:'#e0f2fe',200:'#bae6fd',300:'#7dd3fc',400:'#38bdf8',500:'#0ea5e9',600:'#0284c7',700:'#0369a1',800:'#075985',900:'#0c4a6e'},
-            leaf: {400:'#34d399',600:'#059669'}
+            brand:{50:'#f0f9ff',100:'#e0f2fe',200:'#bae6fd',300:'#7dd3fc',400:'#38bdf8',500:'#0ea5e9',600:'#0284c7',700:'#0369a1',800:'#075985',900:'#0c4a6e'},
+            leaf:{400:'#34d399',600:'#059669'}
           },
           boxShadow:{soft:'0 10px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04)'}
         }
       }
     }
   </script>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
   <style>
     html{scroll-behavior:smooth}
     body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,"Noto Sans",sans-serif}
@@ -36,54 +86,33 @@
     .ph{background-image:linear-gradient(135deg,#f1f5f9 0%,#e2e8f0 100%)}
     section[id]{scroll-margin-top:96px}
 
-    /* Responsive tables: компактно на телефонах, без горизонтального скролла и с ровным выравниванием */
-    table.responsive{width:100%; border-collapse:collapse}
-    table.responsive th, table.responsive td{white-space:normal; word-break:break-word}
-    table.responsive thead th{background:#eff6ff} /* brand-50 */
-
-    @media (max-width: 640px){
+    /* Таблицы: мобильные карточки без горизонтального скролла */
+    table.responsive{width:100%;border-collapse:collapse}
+    table.responsive th,table.responsive td{white-space:normal;word-break:break-word}
+    table.responsive thead th{background:#eff6ff}
+    @media (max-width:640px){
       table.responsive thead{display:none}
-      table.responsive, table.responsive tbody, table.responsive tr, table.responsive td{display:block; width:100%}
+      table.responsive,table.responsive tbody,table.responsive tr,table.responsive td{display:block;width:100%}
       table.responsive tr{
-        background:#fff;
-        border:1px solid #e2e8f0; /* slate-200 */
-        border-radius:0.75rem;     /* rounded-xl */
-        box-shadow:0 10px 25px -5px rgba(0,0,0,.05);
-        padding:10px 12px;
-        margin-bottom:12px;
+        background:#fff;border:1px solid #e2e8f0;border-radius:.75rem;
+        box-shadow:0 10px 25px -5px rgba(0,0,0,.05);padding:10px 12px;margin-bottom:12px
       }
-      /* Строчки выровнены: слева ярлык, справа значение на одной линии */
       table.responsive td{
-        display:flex;
-        justify-content:space-between;
-        align-items:flex-start;
-        gap:10px;
-        padding:6px 0;
-        border:none;
-        font-size:0.95rem;
-        line-height:1.25rem;
-        text-align:right; /* значение прижимается вправо */
+        display:flex;justify-content:space-between;align-items:flex-start;gap:10px;
+        padding:6px 0;border:none;font-size:.95rem;line-height:1.25rem;text-align:right
       }
       table.responsive td:first-child{
-        justify-content:flex-start;
-        text-align:left;
-        font-weight:700;
-        font-size:1rem;
-        padding-top:2px;
+        justify-content:flex-start;text-align:left;font-weight:700;font-size:1rem;padding-top:2px
       }
       table.responsive td:not(:first-child)::before{
-        content:attr(data-th);
-        flex:0 0 auto;
-        min-width:7.5rem;  /* компактно на телефонах */
-        max-width:55%;
-        font-weight:600;
-        color:#64748b; /* slate-500 */
-        text-align:left;
+        content:attr(data-th);flex:0 0 auto;min-width:7.5rem;max-width:55%;
+        font-weight:600;color:#64748b;text-align:left
       }
       table.responsive td:last-child{margin-bottom:0}
     }
   </style>
 </head>
+
 <body class="bg-white text-slate-900">
 <!--<a href="https://t.me/cleaningassist_bot" target="_blank" rel="noopener"-->
 <!--   class="fixed z-50 bottom-4 right-4 inline-flex items-center gap-2 px-4 py-3 rounded-full bg-[#229ED9] text-white shadow-soft hover:opacity-90">-->
