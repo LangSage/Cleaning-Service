@@ -1,544 +1,371 @@
-@file:OptIn(androidx.compose.material3.ExperimentalMaterial3Api::class)
-
-package com.example.cadence_app
-
-import android.Manifest
-import android.annotation.SuppressLint
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.bluetooth.*
-import android.bluetooth.le.*
-import android.content.Context
-import android.content.Intent
-import android.content.pm.PackageManager
-import android.media.AudioAttributes
-import android.media.RingtoneManager
-import android.os.*
-import android.util.Log
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Settings
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Path
-import androidx.compose.ui.graphics.StrokeCap
-import androidx.compose.ui.graphics.drawscope.Stroke
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import androidx.core.app.ActivityCompat
-import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
-import com.example.cadence_app.ui.theme.Cadence_appTheme
-import org.json.JSONArray
-import org.json.JSONObject
-import java.util.*
-import kotlin.math.max
-import kotlin.math.roundToInt
-
-/* ---------- Prefs / channels ---------- */
-private const val PREFS = "prefs"
-private const val PREF_LAST_DEVICE = "last_device_address"
-private const val PREF_SESSIONS = "sessions_json"   // stores a JSON array of sessions
-private const val CHANNEL_SILENT = "CADENCE_CHANNEL_SILENT"
-private const val CHANNEL_LOUD = "CADENCE_CHANNEL_LOUD"
-
-/* ---------- Main Activity ---------- */
-class MainActivity : ComponentActivity() {
-
-    // BLE core
-    private lateinit var bluetoothAdapter: BluetoothAdapter
-    private var bluetoothGatt: BluetoothGatt? = null
-    private var scanner: BluetoothLeScanner? = null
-    private var scanCallback: ScanCallback? = null
-    private val handler = Handler(Looper.getMainLooper())
-
-    // GATT UUIDs
-    private val CSC_SERVICE_UUID = UUID.fromString("00001816-0000-1000-8000-00805f9b34fb")
-    private val CSC_MEASUREMENT_UUID = UUID.fromString("00002a5b-0000-1000-8000-00805f9b34fb")
-    private val CCCD_UUID = UUID.fromString("00002902-0000-1000-8000-00805f9b34fb")
-
-    // Session state (non-Compose)
-    private var sessionStart = 0L
-    private var lastNonZeroTime = 0L
-    private var alertArmed = true
-    private var rpmHistory = mutableListOf<Pair<Long, Int>>() // (timestampMs, rawRpm)
-
-    // Smoothing state
-    private var lastSmoothed = 0.0
-    private var lastDisplayTime = 0L
-
-    // Continuous alert ticker
-    private val alertHandler = Handler(Looper.getMainLooper())
-    private var alertTickerRunning = false
-
-    @SuppressLint("MissingPermission")
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        val manager = getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
-        bluetoothAdapter = manager.adapter
-        if (!bluetoothAdapter.isEnabled) {
-            startActivity(Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE))
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <!-- Yandex.Metrika counter -->
+  <script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)}
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=104336695', 'ym');
+    ym(104336695, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", accurateTrackBounce:true, trackLinks:true});
+  </script>
+  <noscript><div><img src="https://mc.yandex.ru/watch/104336695" style="position:absolute; left:-9999px;" alt=""></div></noscript>
+  <!-- /Yandex.Metrika counter -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  <meta name="format-detection" content="telephone=yes">
+  <title>Уборка квартир, домов и офисов в Москве — «Служба Чистоты»</title>
+  <meta name="description" content="Профессиональная уборка в Москве и области: периодическая, генеральная, после ремонта, мойка окон, офисы. Работаем 08:00–22:00. Гарантия качества. Звоните: +7 909 976-87-91.">
+  <link rel="canonical" href="https://sluzhba-chistoty.ru/">
+  <link rel="alternate" hreflang="ru-RU" href="https://sluzhba-chistoty.ru/">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <meta name="theme-color" content="#0ea5e9">
+  <meta name="geo.region" content="RU-MOW">
+  <meta name="geo.placename" content="Москва">
+  <meta name="geo.position" content="55.7558;37.6173">
+  <meta name="ICBM" content="55.7558, 37.6173">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Служба Чистоты">
+  <meta property="og:url" content="https://sluzhba-chистoty.ru/">
+  <meta property="og:title" content="Уборка квартир, домов и офисов в Москве — «Служба Чистоты»">
+  <meta property="og:description" content="Периодическая, генеральная и послестроительная уборка. Окна и офисы. Работаем 08:00–22:00. Чек-листы и гарантия.">
+  <meta property="og:image" content="https://sluzhba-chistoty.ru/static/og/cleaning-cover.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Клининговая компания «Служба Чистоты» — уборка в Москве и области">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Уборка квартир и офисов • Москва — «Служба Чистоты»">
+  <meta name="twitter:description" content="Профи-уборка по чек-листам. Ежедневно 08:00–22:00. +7 909 976-87-91">
+  <meta name="twitter:image" content="https://sluzhba-chistoty.ru/static/og/cleaning-cover.jpg">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand:{50:'#f0f9ff',100:'#e0f2fe',200:'#bae6fd',300:'#7dd3fc',400:'#38bdf8',500:'#0ea5e9',600:'#0284c7',700:'#0369a1',800:'#075985',900:'#0c4a6e'},
+            leaf:{400:'#34d399',600:'#059669'}
+          },
+          boxShadow:{soft:'0 10px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04)'}
         }
-        createNotificationChannels()
+      }
+    }
+  </script>
+  <style>
+    html{scroll-behavior:smooth}
+    body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,"Noto Sans",sans-serif}
+    .container-px{padding-left:1rem;padding-right:1rem}
+    @media(min-width:1024px){.container-px{padding-left:2rem;padding-right:2rem}}
+    .ph{background-image:linear-gradient(135deg,#f1f5f9 0%,#e2e8f0 100%)}
+    section[id]{scroll-margin-top:96px}
+    table.responsive{width:100%;border-collapse:collapse}
+    table.responsive th,table.responsive td{white-space:normal;word-break:break-word}
+    table.responsive thead th{background:#eff6ff}
+    @media (max-width:640px){
+      table.responsive thead{display:none}
+      table.responsive,table.responsive tbody,table.responsive tr,table.responsive td{display:block;width:100%}
+      table.responsive tr{
+        background:#fff;border:1px solid #e2e8f0;border-radius:.75rem;
+        box-shadow:0 10px 25px -5px rgba(0,0,0,.05);padding:10px 12px;margin-bottom:12px
+      }
+      table.responsive td{
+        display:flex;justify-content:space-between;align-items:flex-start;gap:10px;
+        padding:6px 0;border:none;font-size:.95rem;line-height:1.25rem;text-align:right
+      }
+      table.responsive td:first-child{
+        justify-content:flex-start;text-align:left;font-weight:700;font-size:1rem;padding-top:2px
+      }
+      table.responsive td:not(:first-child)::before{
+        content:attr(data-th);flex:0 0 auto;min-width:7.5rem;max-width:55%;
+        font-weight:600;color:#64748b;text-align:left
+      }
+      table.responsive td:last-child{margin-bottom:0}
+    }
+  </style>
+</head>
+<body class="bg-white text-slate-900">
+  <div class="bg-brand-900 text-white text-sm">
+    <div class="max-w-7xl mx-auto container-px flex items-center justify-between py-2">
+      <p class="hidden sm:block">Работаем в Москве и области • Ежедневно 8:00–22:00</p>
+      <div class="flex items-center gap-4">
+        <a href="https://wa.me/79099768791?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%20%D1%83%D0%B1%D0%BE%D1%80%D0%BA%D1%83." class="inline-flex items-center gap-2 hover:opacity-90">WhatsApp</a>
+        <a class="font-semibold" href="tel:+79099768791">+79099768791</a>
+      </div>
+    </div>
+  </div>
 
-        setContent {
-            Cadence_appTheme {
-                // Compose state
-                var hasPermissions by remember { mutableStateOf(false) }
-                var scanning by remember { mutableStateOf(false) }
-                var devices by remember { mutableStateOf(listOf<BluetoothDevice>()) }
-                var connected by remember { mutableStateOf(false) }
-                var status by remember { mutableStateOf("Not connected") }
+  <header class="sticky top-0 z-40 bg-white/90 backdrop-blur border-b border-slate-200">
+    <div class="max-w-7xl mx-auto container-px flex items-center justify-between py-3">
+      <a href="#home" class="flex items-center gap-3">
+        <img id="img-logo" alt="Логотип Служба Чистоты" class="h-10 w-10 rounded-xl shadow-soft object-cover ph"/>
+        <div class="leading-5">
+          <div class="font-extrabold tracking-tight text-lg">Служба Чистоты</div>
+          <div class="text-xs text-slate-500">Клининг в Москве и области</div>
+        </div>
+      </a>
+      <nav class="hidden md:flex items-center gap-6 font-medium text-sm">
+        <a href="#about" class="hover:text-brand-700">О нас</a>
+        <a href="#flats" class="hover:text-brand-700">Уборка квартир</a>
+        <a href="#offices" class="hover:text-brand-700">Офисы и помещения</a>
+        <a href="#pricing" class="hover:text-brand-700">Цены</a>
+        <a href="#contacts" class="hover:text-brand-700">Контакты</a>
+      </nav>
+    </div>
+  </header>
 
-                // Live RPM shown (smoothed)
-                var displayRpm by remember { mutableStateOf(0) }
+  <section id="home" class="relative overflow-hidden">
+    <div class="absolute inset-0 -z-10 bg-gradient-to-br from-brand-50 via-white to-leaf-400/10 pointer-events-none"></div>
+    <div class="max-w-7xl mx-auto container-px grid lg:grid-cols-2 gap-10 items-center py-16 lg:py-24">
+      <div>
+        <h1 class="text-4xl sm:text-5xl font-extrabold leading-tight">
+          Чисто. Безопасно. Вовремя.
+          <span class="block text-brand-700">Уборка квартир, домов и офисов</span>
+          <span class="block text-slate-600 text-xl sm:text-2xl mt-4">Москва и область • Ежедневно 8:00–22:00</span>
+        </h1>
+        <ul class="mt-6 space-y-3 text-slate-700">
+          <li class="flex items-start gap-3"><span class="mt-1 h-2.5 w-2.5 rounded-full bg-leaf-400"></span> Надёжные клинеры с проверкой и обучением</li>
+          <li class="flex items-start gap-3"><span class="mt-1 h-2.5 w-2.5 rounded-full bg-leaf-400"></span> Гарантия качества</li>
+        </ul>
+        <div class="mt-8 flex flex-col sm:flex-row gap-3">
+          <a href="#contacts" class="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-brand-700 text-white font-semibold shadow-soft hover:bg-brand-800">Позвонить и заказать</a>
+          <a href="#flats" class="inline-flex items-center justify-center px-6 py-3 rounded-xl border border-slate-300 font-semibold hover:bg-slate-50">Что входит</a>
+        </div>
+        <div class="mt-6 text-sm text-slate-500">Среднее время отклика — 10 минут. Работаем без предоплаты.</div>
+      </div>
+      <div class="relative">
+        <div class="aspect-[4/3] w-full rounded-2xl bg-slate-100 shadow-soft overflow-hidden">
+          <img id="img-hero" alt="Геро-баннер: процесс уборки" class="w-full h-full object-cover ph"/>
+        </div>
+      </div>
+    </div>
+  </section>
 
-                // Settings
-                var thresholdRpm by remember { mutableStateOf(90) }
-                var idleTimeoutMin by remember { mutableStateOf(2) }
-                var soundEnabled by remember { mutableStateOf(true) }
-                var continuousAlerts by remember { mutableStateOf(true) } // NEW: every second while below
-                var showSettings by remember { mutableStateOf(false) }
+  <section id="about" class="bg-slate-50">
+    <div class="max-w-7xl mx-auto container-px py-16">
+      <div class="max-w-3xl mb-10">
+        <h2 class="text-3xl font-extrabold tracking-tight">Почему «Служба Чистоты»</h2>
+        <p class="mt-4 text-slate-700">Выполняем уборку квартир, домов, помещений и офисов в Москве и области. Рекомендуют семьям, арендодателям и бизнесу. Страхуем ответственность, используем сертифицированные средства и бережём ваше время.</p>
+      </div>
+    </div>
+  </section>
 
-                // Training flow
-                var trainingOver by remember { mutableStateOf(false) }
+  <section id="flats" class="bg-white">
+    <div class="max-w-7xl mx-auto container-px py-16 grid md:grid-cols-2 gap-10 items-start">
+      <div class="order-2 md:order-1">
+        <h2 class="text-3xl font-extrabold tracking-tight">Уборка квартир и домов</h2>
+        <div class="mt-3">
+          <span class="inline-flex items-center gap-2 text-sm px-3 py-1 rounded-full bg-brand-50 border border-brand-200 text-brand-800">
+            🏠 Квартиры: <strong>от 200 руб/м²</strong>
+          </span>
+        </div>
+        <p class="mt-4 text-slate-700">Работаем по форматам из прайса: генеральная и после ремонта. Поддерживающая уборка — по ставке за м².</p>
+      </div>
+      <div class="order-1 md:order-2">
+        <div class="aspect-[4/3] w-full rounded-2xl bg-slate-100 shadow-soft overflow-hidden">
+          <img id="img-flats" alt="Уборка квартир" class="w-full h-full object-cover ph"/>
+        </div>
+      </div>
+    </div>
+  </section>
 
-                RequestBlePermissions(
-                    onGranted = { hasPermissions = true },
-                    onDenied = { status = "Bluetooth permissions denied" }
-                )
+  <section id="offices" class="bg-slate-50">
+    <div class="max-w-7xl mx-auto container-px py-16 grid md:grid-cols-2 gap-10 items-center">
+      <div>
+        <div class="aspect-[4/3] w-full rounded-2xl bg-slate-100 shadow-soft overflow-hidden">
+          <img id="img-offices" alt="Уборка офисов" class="w-full h-full object-cover ph"/>
+        </div>
+      </div>
+      <div>
+        <h2 class="text-3xl font-extrabold tracking-tight">Офисы и коммерческие помещения</h2>
+        <p class="mt-4 text-slate-700">Поддерживаем чистоту офисов, салонов, магазинов и производственных помещений. Убираем в удобное для вас время: до/после смены.</p>
+        <a href="#pricing" class="mt-6 inline-flex px-5 py-3 rounded-xl bg-brand-700 text-white font-semibold hover:bg-brand-800">Смотреть цены</a>
+      </div>
+    </div>
+  </section>
 
-                // Auto-reconnect when ready
-                LaunchedEffect(hasPermissions) {
-                    if (hasPermissions) {
-                        tryAutoReconnect(
-                            onStatus = { status = it },
-                            onRpmRaw = { raw ->
-                                val now = System.currentTimeMillis()
-                                val smoothed = smoothRpm(raw, now)
-                                displayRpm = smoothed
-                                onNewCadenceSample(
-                                    rawRpm = raw,
-                                    shownRpm = smoothed,
-                                    threshold = thresholdRpm,
-                                    soundEnabled = soundEnabled,
-                                    continuousAlerts = continuousAlerts,
-                                    trainingOverSetter = { trainingOver = it },
-                                    idleTimeoutMinProvider = { idleTimeoutMin },
-                                    statusSetter = { status = it }
-                                )
-                            },
-                            onConnected = {
-                                connected = true
-                                status = "Connected. Receiving cadence…"
-                                startSessionIfNeeded()
-                            }
-                        )
-                    }
-                }
+  <!-- Pricing -->
+  <section id="pricing" class="bg-slate-50">
+    <div class="max-w-7xl mx-auto container-px py-16">
+      <h2 class="text-3xl font-extrabold tracking-tight">Цены</h2>
+      <p class="mt-4 text-slate-700">Актуальный прайс из загруженной таблицы. Таблицы адаптируются под телефон.</p>
 
-                Surface(Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
-                    Column(Modifier.fillMaxSize()) {
-                        TopAppBar(
-                            title = { Text(if (!connected) "Bluetooth Devices" else "Training") },
-                            actions = {
-                                IconButton(onClick = { showSettings = true }) {
-                                    Icon(Icons.Default.Settings, contentDescription = "Settings")
-                                }
-                            }
-                        )
+      <!-- Поиск по ценам -->
+      <div class="mt-6 flex flex-col sm:flex-row gap-3 items-stretch sm:items-center">
+        <input id="priceSearch" type="search" inputmode="search"
+               placeholder="Поиск по услуге, площади или цене… (напр. 60 м², >5000, витрины)"
+               class="flex-1 rounded-xl border border-slate-300 px-3 py-2 focus:outline-none focus:ring-4 focus:ring-brand-200" />
+        <button id="clearSearch"
+                class="px-4 py-2 rounded-xl border border-slate-300 hover:bg-slate-50">
+          Сбросить
+        </button>
+      </div>
+      <div id="searchStat" class="mt-2 text-sm text-slate-500" aria-live="polite"></div>
 
-                        when {
-                            !hasPermissions -> Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                                Text("Grant Bluetooth & Location permissions")
-                            }
+      <div class="mt-6 grid gap-6">
 
-                            trainingOver -> TrainingSummary(
-                                rpmHistory = loadLastSessionGraph(this@MainActivity),
-                                onRestart = {
-                                    trainingOver = false
-                                    rpmHistory.clear()
-                                    status = "Restarting…"
-                                    startSessionIfNeeded()
-                                }
-                            )
+        <!-- КВАРТИРЫ -->
+        <section id="cat-Квартиры" class="bg-white rounded-2xl border border-slate-200 shadow-soft">
+          <div class="px-6 pt-4 pb-2 flex items-center justify-between">
+            <h3 class="text-lg font-semibold">🏠 Квартиры</h3>
+          </div>
+          <div class="px-2 pb-4">
+            <table class="responsive text-sm border-t border-slate-200">
+              <thead class="bg-brand-50 text-slate-700">
+                <tr>
+                  <th class="text-left px-4 py-2">Площадь</th>
+                  <th class="text-left px-4 py-2">Генеральная</th>
+                  <th class="text-left px-4 py-2">После ремонта</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- заполняется из вашей таблицы, см. файл -->
+              </tbody>
+            </table>
+            <p class="px-4 pt-2 text-xs text-slate-500">Поддерживающая уборка: от 200 руб/м² (по данным таблицы).</p>
+          </div>
+        </section>
 
-                            connected -> LiveChartView(
-                                rpmHistory = rpmHistory, // raw history, chart shows line + numbers
-                                rpm = displayRpm,
-                                status = status,
-                                onFinish = {
-                                    finishSessionAndSave()
-                                    trainingOver = true
-                                    status = "Training finished"
-                                },
-                                onDisconnect = {
-                                    disconnect()
-                                    stopContinuousAlertTicker()
-                                    connected = false
-                                    status = "Disconnected"
-                                }
-                            )
+        <!-- ОФИСЫ -->
+        <section id="cat-Офисы" class="bg-white rounded-2xl border border-slate-200 shadow-soft">
+          <div class="px-6 pt-4 pb-2 flex items-center justify-between">
+            <h3 class="text-lg font-semibold">🏢 Офисы</h3>
+          </div>
+          <div class="px-2 pb-4">
+            <table class="responsive text-sm border-t border-slate-200">
+              <thead class="bg-brand-50 text-slate-700">
+                <tr>
+                  <th class="text-left px-4 py-2">Работа</th>
+                  <th class="text-left px-4 py-2">Площадь</th>
+                  <th class="text-left px-4 py-2">Цена</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- заполняется из вашей таблицы, см. файл -->
+              </tbody>
+            </table>
+          </div>
+        </section>
 
-                            else -> ConnectMenu(
-                                scanning = scanning,
-                                devices = devices,
-                                status = status,
-                                onScanToggle = {
-                                    if (!scanning) {
-                                        devices = emptyList()
-                                        startScan(
-                                            onStatus = { status = it },
-                                            onDeviceFound = { d ->
-                                                if (devices.none { it.address == d.address })
-                                                    devices = devices + d
-                                            }
-                                        )
-                                        scanning = true
-                                        handler.postDelayed({
-                                            stopScan(); scanning = false
-                                            status = "Scan finished (${devices.size} found)"
-                                        }, 15_000)
-                                    } else {
-                                        stopScan(); scanning = false
-                                        status = "Scan stopped"
-                                    }
-                                },
-                                onDeviceSelected = { device ->
-                                    stopScan()
-                                    saveLastDevice(device.address)
-                                    connectToDevice(
-                                        device,
-                                        onStatus = { status = it },
-                                        onRpmRaw = { raw ->
-                                            val now = System.currentTimeMillis()
-                                            val smoothed = smoothRpm(raw, now)
-                                            displayRpm = smoothed
-                                            onNewCadenceSample(
-                                                rawRpm = raw,
-                                                shownRpm = smoothed,
-                                                threshold = thresholdRpm,
-                                                soundEnabled = soundEnabled,
-                                                continuousAlerts = continuousAlerts,
-                                                trainingOverSetter = { trainingOver = it },
-                                                idleTimeoutMinProvider = { idleTimeoutMin },
-                                                statusSetter = { status = it }
-                                            )
-                                        },
-                                        onConnected = {
-                                            connected = true
-                                            status = "Connected. Receiving cadence…"
-                                            startSessionIfNeeded()
-                                        }
-                                    )
-                                }
-                            )
-                        }
-                    }
+        <!-- МЫТЬЁ ОКОН -->
+        <section id="cat-Мытьё окон" class="bg-white rounded-2xl border border-slate-200 shadow-soft">
+          <div class="px-6 pt-4 pb-2 flex items-center justify-between">
+            <h3 class="text-lg font-semibold">🪟 Мытьё окон</h3>
+          </div>
+          <div class="px-2 pb-4">
+            <table class="responsive text-sm border-t border-slate-200">
+              <thead class="bg-brand-50 text-slate-700">
+                <tr>
+                  <th class="text-left px-4 py-2">Услуга</th>
+                  <th class="text-left px-4 py-2">Цена</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- заполняется из вашей таблицы, см. файл -->
+              </tbody>
+            </table>
+          </div>
+        </section>
 
-                    if (showSettings) {
-                        SettingsSheet(
-                            threshold = thresholdRpm,
-                            onThresholdChange = { thresholdRpm = it; alertArmed = true },
-                            idleMinutes = idleTimeoutMin,
-                            onIdleMinutesChange = { idleTimeoutMin = it },
-                            soundEnabled = soundEnabled,
-                            onSoundEnabledChange = { soundEnabled = it },
-                            continuousAlerts = continuousAlerts,
-                            onContinuousAlertsChange = { continuousAlerts = it; if (!it) stopContinuousAlertTicker() },
-                            onClose = { showSettings = false }
-                        )
-                    }
-                }
-            }
+      </div><!-- /.grid -->
+
+      <p class="mt-6 text-sm text-slate-600">
+        Цены на услуги не являются окончательными, точную стоимость уточняйте у менеджеров компании.
+      </p>
+    </div>
+  </section>
+
+  <section id="contacts" class="bg-white">
+    <div class="max-w-7xl mx-auto container-px py-16 grid lg:grid-cols-2 gap-10 items-start">
+      <div>
+        <h2 class="text-3xl font-extrabold tracking-tight">Контакты</h2>
+        <p class="mt-4 text-slate-700">Позвоните или напишите — ответим в течение 10 минут.</p>
+        <div class="mt-6 grid sm:grid-cols-2 gap-4">
+          <a href="tel:+79099768791" class="p-5 rounded-2xl bg-brand-700 text-white font-semibold shadow-soft hover:bg-brand-800 flex items-center justify-center">Позвонить: +79099768791</a>
+          <a href="https://wa.me/79099768791" class="p-5 rounded-2xl border border-slate-300 font-semibold hover:bg-slate-50 flex items-center justify-center">Написать в WhatsApp</a>
+        </div>
+        <div class="mt-6 p-4 bg-slate-50 rounded-2xl border border-slate-200">
+          <div class="text-sm text-slate-600">ООО «Чистое сияние» • ИНН 9715514385 • ОГРН 1257700337597</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="bg-slate-900 text-slate-200">
+    <div class="max-w-7xl mx-auto container-px py-12 grid md:grid-cols-4 gap-8">
+      <div><div class="font-extrabold text-white text-lg">Служба Чистоты</div></div>
+      <div><div class="font-semibold">Услуги</div></div>
+      <div><div class="font-semibold">Компания</div></div>
+      <div><div class="font-semibold">Связь</div></div>
+    </div>
+    <div class="border-t border-slate-800 py-6 text-center text-xs text-slate-500">© <span id="y"></span> «Служба Чистоты»</div>
+  </footer>
+
+  <script>
+    // Year
+    document.getElementById('y') && (document.getElementById('y').textContent = new Date().getFullYear());
+
+    // ==== УМНЫЙ ПОИСК ПО ЦЕНАМ ====
+    (function(){
+      const input = document.getElementById('priceSearch');
+      const clearBtn = document.getElementById('clearSearch');
+      const stat = document.getElementById('searchStat');
+      const tables = Array.from(document.querySelectorAll('#pricing table.responsive'));
+
+      tables.forEach(t => {
+        const tbody = t.querySelector('tbody');
+        if(!tbody) return;
+        const tr = document.createElement('tr');
+        tr.className = 'no-results hidden';
+        const td = document.createElement('td');
+        td.colSpan = t.querySelectorAll('thead th').length || 2;
+        td.className = 'px-4 py-3 text-slate-500';
+        td.textContent = 'Нет совпадений';
+        tr.appendChild(td);
+        tbody.appendChild(tr);
+      });
+
+      function norm(s){return (s||'').toString().toLowerCase().replace(/ё/g,'е').replace(/\s+/g,' ').trim();}
+      function extractNumbers(s){const out=[];const re=/\d[\d\s]*/g;let m;while((m=re.exec(s))!==null){out.push(parseFloat(m[0].replace(/\s+/g,'')));}return out;}
+      function cmpNumbers(nums,op,val){if(!nums.length)return false;if(op==='>')return nums.some(n=>n>val);if(op==='>=')return nums.some(n=>n>=val);if(op==='<')return nums.some(n=>n<val);if(op==='<=')return nums.some(n=>n<=val);return false;}
+      function matches(row,q){
+        if(!q) return true;
+        const text = norm(row.innerText);
+        const cmp = q.match(/^([<>]=?)\s*(\d+)\s*$/);
+        if(cmp){const op=cmp[1];const val=parseFloat(cmp[2]);const nums=extractNumbers(row.innerText);return cmpNumbers(nums,op,val);}
+        const range = q.match(/^(\d+)\s*[-–]\s*(\d+)\s*$/);
+        if(range){
+          const a=parseFloat(range[1]), b=parseFloat(range[2]);
+          const ok = text.includes(`${range[1]}`) && text.includes(`${range[2]}`);
+          if(ok) return true;
+          const nums=extractNumbers(row.innerText);return nums.some(n=>n>=Math.min(a,b)&&n<=Math.max(a,b));
         }
-    }
-
-    /* ---------- Smoothing / inertia ---------- */
-    private fun smoothRpm(raw: Int, now: Long): Int {
-        // Guard against brief zeros after start/traffic lights: hold for up to 3s since last non-zero.
-        val effective = if (raw == 0 && now - lastNonZeroTime < 3_000L) {
-            lastSmoothed.roundToInt().coerceAtLeast(0)
-        } else raw
-
-        // EWMA smoothing for display
-        val alpha = 0.30
-        lastSmoothed = if (lastDisplayTime == 0L) {
-            effective.toDouble()
-        } else {
-            alpha * effective + (1 - alpha) * lastSmoothed
-        }
-        lastDisplayTime = now
-        return lastSmoothed.roundToInt()
-    }
-
-    /* ---------- Training/session helpers ---------- */
-    private fun startSessionIfNeeded() {
-        if (sessionStart == 0L) {
-            sessionStart = System.currentTimeMillis()
-            lastNonZeroTime = sessionStart
-            rpmHistory.clear()
-            alertArmed = true
-        }
-    }
-
-    private fun onNewCadenceSample(
-        rawRpm: Int,
-        shownRpm: Int,
-        threshold: Int,
-        soundEnabled: Boolean,
-        continuousAlerts: Boolean,
-        trainingOverSetter: (Boolean) -> Unit,
-        idleTimeoutMinProvider: () -> Int,
-        statusSetter: (String) -> Unit
-    ) {
-        val now = System.currentTimeMillis()
-        rpmHistory.add(now to shownRpm)
-
-        // "Activity" clock uses raw non-zero
-        if (rawRpm > 0) lastNonZeroTime = now
-
-        // Idle => end session
-        val idleMs = idleTimeoutMinProvider() * 60_000L
-        if (now - lastNonZeroTime >= idleMs) {
-            finishSessionAndSave()
-            trainingOverSetter(true)
-            statusSetter("Training over (idle ≥ ${idleTimeoutMinProvider()} min)")
-            return
-        }
-
-        // Alerts
-        if (continuousAlerts) {
-            if (shownRpm < threshold) startContinuousAlertTicker(shownRpm, soundEnabled)
-            else stopContinuousAlertTicker()
-        } else {
-            sendOnceOnDrop(shownRpm, threshold, soundEnabled)
-        }
-    }
-
-    private fun sendOnceOnDrop(current: Int, threshold: Int, soundEnabled: Boolean) {
-        if (alertArmed && current < threshold) {
-            postAlertNotification(current, soundEnabled)
-            alertArmed = false
-        }
-        if (current >= threshold) alertArmed = true
-    }
-
-    private fun startContinuousAlertTicker(current: Int, sound: Boolean) {
-        if (alertTickerRunning) return
-        alertTickerRunning = true
-        alertHandler.post(object : Runnable {
-            override fun run() {
-                postAlertNotification(current, sound)
-                if (alertTickerRunning) alertHandler.postDelayed(this, 1_000L)
-            }
-        })
-    }
-
-    private fun stopContinuousAlertTicker() {
-        alertTickerRunning = false
-        alertHandler.removeCallbacksAndMessages(null)
-    }
-
-    private fun finishSessionAndSave() {
-        try {
-            saveSession(this, sessionStart, System.currentTimeMillis(), rpmHistory.toList())
-        } catch (_: Exception) {}
-        try { disconnect() } catch (_: Exception) {}
-        stopContinuousAlertTicker()
-        sessionStart = 0L
-        lastDisplayTime = 0L
-        lastSmoothed = 0.0
-    }
-
-    /* ---------- BLE: auto-reconnect ---------- */
-    @SuppressLint("MissingPermission")
-    private fun tryAutoReconnect(
-        onStatus: (String) -> Unit,
-        onRpmRaw: (Int) -> Unit,
-        onConnected: () -> Unit
-    ) {
-        val last = getSharedPreferences(PREFS, Context.MODE_PRIVATE)
-            .getString(PREF_LAST_DEVICE, null) ?: return
-        val device = runCatching { bluetoothAdapter.getRemoteDevice(last) }.getOrNull() ?: return
-        onStatus("Reconnecting to last device…")
-        connectToDevice(device, onStatus, onRpmRaw, onConnected)
-    }
-
-    private fun saveLastDevice(address: String) {
-        getSharedPreferences(PREFS, Context.MODE_PRIVATE)
-            .edit().putString(PREF_LAST_DEVICE, address).apply()
-    }
-
-    /* ---------- BLE: scan ---------- */
-    @SuppressLint("MissingPermission")
-    private fun startScan(onStatus: (String) -> Unit, onDeviceFound: (BluetoothDevice) -> Unit) {
-        scanner = bluetoothAdapter.bluetoothLeScanner
-        val settings = ScanSettings.Builder().setScanMode(ScanSettings.SCAN_MODE_LOW_LATENCY).build()
-        scanCallback = object : ScanCallback() {
-            override fun onScanResult(callbackType: Int, result: ScanResult) { onDeviceFound(result.device) }
-            override fun onScanFailed(errorCode: Int) { onStatus("Scan failed: $errorCode") }
-        }
-        if (hasScanPermission()) {
-            scanner?.startScan(null, settings, scanCallback)
-            @Suppress("DEPRECATION")
-            bluetoothAdapter.startLeScan { d, _, _ -> onDeviceFound(d) }
-            onStatus("Scanning…")
-        } else onStatus("Missing scan permission")
-    }
-
-    @SuppressLint("MissingPermission")
-    private fun stopScan() {
-        try { scanner?.stopScan(scanCallback) } catch (_: Exception) {}
-        try { @Suppress("DEPRECATION") bluetoothAdapter.stopLeScan(null) } catch (_: Exception) {}
-    }
-
-    /* ---------- BLE: connect ---------- */
-    @SuppressLint("MissingPermission")
-    private fun connectToDevice(
-        device: BluetoothDevice,
-        onStatus: (String) -> Unit,
-        onRpmRaw: (Int) -> Unit,
-        onConnected: () -> Unit
-    ) {
-        onStatus("Connecting to ${device.name ?: device.address}…")
-        device.connectGatt(this, false, object : BluetoothGattCallback() {
-            override fun onConnectionStateChange(gatt: BluetoothGatt, status: Int, newState: Int) {
-                if (status != BluetoothGatt.GATT_SUCCESS) { onStatus("Connection error: $status"); return }
-                if (newState == BluetoothProfile.STATE_CONNECTED) {
-                    bluetoothGatt = gatt
-                    onStatus("Connected. Discovering services…")
-                    gatt.discoverServices()
-                    onConnected()
-                } else if (newState == BluetoothProfile.STATE_DISCONNECTED) {
-                    onStatus("Disconnected")
-                }
-            }
-
-            override fun onServicesDiscovered(gatt: BluetoothGatt, status: Int) {
-                val svc = gatt.getService(CSC_SERVICE_UUID)
-                val ch = svc?.getCharacteristic(CSC_MEASUREMENT_UUID)
-                if (ch != null) {
-                    gatt.setCharacteristicNotification(ch, true)
-                    ch.getDescriptor(CCCD_UUID)?.let {
-                        it.value = BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE
-                        gatt.writeDescriptor(it)
-                    }
-                } else onStatus("Cadence service not found")
-            }
-
-            override fun onCharacteristicChanged(gatt: BluetoothGatt, characteristic: BluetoothGattCharacteristic) {
-                if (characteristic.uuid == CSC_MEASUREMENT_UUID) {
-                    val raw = parseCadenceCsc(characteristic.value)
-                    onRpmRaw(raw)
-                }
-            }
-        })
-    }
-
-    @SuppressLint("MissingPermission")
-    private fun disconnect() { bluetoothGatt?.close(); bluetoothGatt = null }
-
-    /* ---------- Cadence parser (unchanged) ---------- */
-    private var lastRev: Int? = null
-    private var lastTime: Int? = null
-    private fun parseCadenceCsc(data: ByteArray): Int {
-        if (data.isEmpty()) return 0
-        val flags = data[0].toInt() and 0xFF
-        val crankPresent = (flags and 0x02) != 0
-        if (!crankPresent || data.size < 5) return 0
-        val rev = ((data[2].toInt() and 0xFF) shl 8) or (data[1].toInt() and 0xFF)
-        val time = ((data[4].toInt() and 0xFF) shl 8) or (data[3].toInt() and 0xFF)
-        val rpm = if (lastRev != null && lastTime != null) {
-            val dRev = (rev - lastRev!!).let { if (it < 0) it + 65536 else it }
-            val dTime = (time - lastTime!!).let { if (it < 0) it + 65536 else it }
-            if (dTime > 0) (dRev * 60 * 1024) / dTime else 0
-        } else 0
-        lastRev = rev; lastTime = time; return rpm
-    }
-
-    /* ---------- Notifications ---------- */
-    private fun createNotificationChannels() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val silent = NotificationChannel(CHANNEL_SILENT, "Cadence (silent)", NotificationManager.IMPORTANCE_LOW)
-            val soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
-            val attrs = AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_NOTIFICATION_EVENT).build()
-            val loud = NotificationChannel(CHANNEL_LOUD, "Cadence (alerts)", NotificationManager.IMPORTANCE_HIGH).apply {
-                enableVibration(true); vibrationPattern = longArrayOf(0, 120); setSound(soundUri, attrs)
-            }
-            getSystemService(NotificationManager::class.java).apply {
-                createNotificationChannel(silent); createNotificationChannel(loud)
-            }
-        }
-    }
-
-    private fun postAlertNotification(rpmNow: Int, soundEnabled: Boolean) {
-        val ch = if (soundEnabled) CHANNEL_LOUD else CHANNEL_SILENT
-        val builder = NotificationCompat.Builder(this, ch)
-            .setSmallIcon(android.R.drawable.ic_dialog_info)
-            .setContentTitle("Cadence low")
-            .setContentText("$rpmNow RPM")
-            .setPriority(if (soundEnabled) NotificationCompat.PRIORITY_HIGH else NotificationCompat.PRIORITY_LOW)
-        with(NotificationManagerCompat.from(this)) {
-            if (ActivityCompat.checkSelfPermission(this@MainActivity, Manifest.permission.POST_NOTIFICATIONS)
-                == PackageManager.PERMISSION_GRANTED) {
-                notify((System.currentTimeMillis() % Int.MAX_VALUE).toInt(), builder.build())
-            }
-        }
-    }
-
-    private fun hasScanPermission(): Boolean =
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S)
-            ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_SCAN) == PackageManager.PERMISSION_GRANTED
-        else
-            ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
-}
-
-/* ========================== UI ========================== */
-
-@Composable
-fun ConnectMenu(
-    scanning: Boolean,
-    devices: List<BluetoothDevice>,
-    status: String,
-    onScanToggle: () -> Unit,
-    onDeviceSelected: (BluetoothDevice) -> Unit
-) {
-    Column(Modifier.fillMaxSize().padding(16.dp), horizontalAlignment = Alignment.CenterHorizontally) {
-        Button(onClick = onScanToggle) { Text(if (scanning) "Stop Scan" else "Scan for Devices") }
-        Spacer(Modifier.height(12.dp))
-        LazyColumn(Modifier.weight(1f)) {
-            items(devices) { d ->
-                Card(Modifier.fillMaxWidth().padding(vertical = 4.dp).clickable { onDeviceSelected(d) }) {
-                    Column(Modifier.padding(12.dp)) { Text(d.name ?: "Unnamed", fontSize = 18.sp); Text(d.address, fontSize = 12.sp) }
-                }
-            }
-        }
-        Spacer(Modifier.height(8.dp)); Text(status, fontSize = 14.sp)
-    }
-}
-
-@Composable
-fun LiveChartView(
-    rpmHistory: List<Pair<Long, Int>>,
-    rpm: Int,
-    status: String,
-    onFinish: () -> Unit,
-    onDisconnect: () -> Unit
-) {
-    val maxRpm = max(120, rpmHistory.maxOfOrNull { it.second } ?: 0)
-    val start = rpmHistory.firstOrNull()?.first ?: 0L
-    val end = r
+        const tokens = q.split(/\s+/).filter(Boolean);
+        return tokens.every(t=>text.includes(t));
+      }
+      function applySearch(){
+        const q = norm(input && input.value);
+        let shown=0;
+        tables.forEach(t=>{
+          const rows = Array.from(t.querySelectorAll('tbody tr')).filter(tr=>!tr.classList.contains('no-results'));
+          const emptyRow = t.querySelector('tbody tr.no-results');
+          let visibleInTable=0;
+          rows.forEach(r=>{const ok=matches(r,q);r.classList.toggle('hidden',!ok);if(ok) visibleInTable++;});
+          if(emptyRow){emptyRow.classList.toggle('hidden', visibleInTable!==0);}
+          shown += visibleInTable;
+        });
+        if(stat){stat.textContent = q ? (shown?`Найдено позиций: ${shown}`:'Совпадений не найдено') : '';}
+      }
+      if(input){input.addEventListener('input', applySearch);input.addEventListener('keydown', e=>{if(e.key==='Escape'){input.value='';applySearch();input.blur();}});}
+      if(clearBtn){clearBtn.addEventListener('click', ()=>{if(input){input.value='';applySearch();input.focus();}});}
+    })();
+  </script>
+</body>
+</html>
