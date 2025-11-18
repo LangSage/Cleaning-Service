@@ -382,42 +382,56 @@
             <h3 class="text-lg font-semibold">🏠 Квартиры</h3>
           </div>
           <div class="px-2 pb-4">
-           <table class="responsive text-sm border-t border-slate-200">
+
+        <table class="responsive text-sm border-t border-slate-200">
   <thead class="bg-brand-50 text-slate-700">
     <tr>
       <th class="text-left px-4 py-2">Услуга</th>
-      <th class="text-left px-4 py-2"> 1 м².</th>
-
+      <th class="text-left px-4 py-2">до 50 м²</th>
+      <th class="text-left px-4 py-2">до 60 м²</th>
+      <th class="text-left px-4 py-2">до 70 м²</th>
+      <th class="text-left px-4 py-2">до 80 м²</th>
+      <th class="text-left px-4 py-2">до 90 м²</th>
+      <th class="text-left px-4 py-2">до 100 м²</th>
+      <th class="text-left px-4 py-2">далее, 1 м²</th>
     </tr>
   </thead>
-  <tbody>
-    <tr class="odd:bg-white even:bg-slate-50 hover:bg-slate-100">
-      <td class="px-4 py-2 font-semibold" data-th="Услуга">Поддерживающая уборка </td>
 
-      <td class="px-4 py-2" data-th="1 м²">от 200 р/кв.м</td>
+  <tbody>
+    <!-- Поддерживающая уборка -->
+    <tr class="odd:bg-white even:bg-slate-50 hover:bg-slate-100">
+      <td class="px-4 py-2 font-semibold" data-th="Услуга">
+        Поддерживающая уборка
+      </td>
+      <!-- одна цена за м² для всех площадей -->
+      <td class="px-4 py-2" colspan="7" data-th="1 м²">
+        от 99 р/кв.м
+      </td>
     </tr>
 
+    <!-- Генеральная уборка -->
     <tr class="odd:bg-white even:bg-slate-50 hover:bg-slate-100">
-  <td class="px-4 py-2 font-semibold" data-th="Услуга">Генеральная уборка</td>
-  <td class="px-4 py-2" data-th="до 50 м².">от 19000</td>
-  <td class="px-4 py-2" data-th="до 60 м².">от 20000</td>
-  <td class="px-4 py-2" data-th="до 70 м².">от 21000</td>
-  <td class="px-4 py-2" data-th="до 80 м².">от 22000</td>
-  <td class="px-4 py-2" data-th="до 90 м².">от 23000</td>
-  <td class="px-4 py-2" data-th="до 100 м².">—</td>
-  <td class="px-4 py-2" data-th="далее">от 240 р/кв.м</td>
-</tr>
+      <td class="px-4 py-2 font-semibold" data-th="Услуга">Генеральная уборка</td>
+      <td class="px-4 py-2" data-th="до 50 м²">от 9900</td>
+      <td class="px-4 py-2" data-th="до 60 м²">от 12000</td>
+      <td class="px-4 py-2" data-th="до 70 м²">от 14000</td>
+      <td class="px-4 py-2" data-th="до 80 м²">от 16000</td>
+      <td class="px-4 py-2" data-th="до 90 м²">от 18000</td>
+      <td class="px-4 py-2" data-th="до 100 м²">—</td>
+      <td class="px-4 py-2" data-th="далее">от 200 р/кв.м</td>
+    </tr>
 
-<tr class="odd:bg-white even:bg-slate-50 hover:bg-slate-100">
-  <td class="px-4 py-2 font-semibold" data-th="Услуга">Уборка после ремонта</td>
-  <td class="px-4 py-2" data-th="до 50 м².">от 19000</td>
-  <td class="px-4 py-2" data-th="до 60 м².">от 20000</td>
-  <td class="px-4 py-2" data-th="до 70 м².">от 21000</td>
-  <td class="px-4 py-2" data-th="до 80 м².">от 22000</td>
-  <td class="px-4 py-2" data-th="до 90 м².">от 23000</td>
-  <td class="px-4 py-2" data-th="до 100 м².">от 24000</td>
-  <td class="px-4 py-2" data-th="далее">от 240 р/кв.м</td>
-</tr>
+    <!-- Уборка после ремонта -->
+    <tr class="odd:bg-white even:bg-slate-50 hover:bg-slate-100">
+      <td class="px-4 py-2 font-semibold" data-th="Услуга">Уборка после ремонта</td>
+      <td class="px-4 py-2" data-th="до 50 м²">от 12500</td>
+      <td class="px-4 py-2" data-th="до 60 м²">от 15000</td>
+      <td class="px-4 py-2" data-th="до 70 м²">от 17500</td>
+      <td class="px-4 py-2" data-th="до 80 м²">от 20000</td>
+      <td class="px-4 py-2" data-th="до 90 м²">от 22500</td>
+      <td class="px-4 py-2" data-th="до 100 м²">от 9900</td>
+      <td class="px-4 py-2" data-th="далее">от 250 р/кв.м</td>
+    </tr>
   </tbody>
 </table>
 
